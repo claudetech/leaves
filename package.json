@@ -1,0 +1,35 @@
+{
+  "name": "leaves",
+  "version": "0.1.0",
+  "description": "Simple build tool for designers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/claudetech/leaves"
+  },
+  "keywords": [
+    "build",
+    "tool",
+    "generator",
+    "designer"
+  ],
+  "author": "Daniel Perez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/claudetech/leaves/issues"
+  },
+  "homepage": "https://github.com/claudetech/leaves",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-coffee": "^0.10.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-newer": "^0.7.0",
+    "load-grunt-tasks": "^0.6.0"
+  },
+  "dependencies": {
+    "argparse": "^0.1.15"
+  }
+}
