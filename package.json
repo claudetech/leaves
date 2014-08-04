@@ -4,7 +4,7 @@
   "description": "Simple build tool for designers",
   "main": "index.js",
   "bin": {
-    "leaves": "bin/leaves"
+    "leaves": "bin/leaves.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

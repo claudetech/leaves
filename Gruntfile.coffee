@@ -13,13 +13,10 @@ module.exports = (grunt) ->
       lib:
         files: [
           expand: true
-          cwd: 'src/app'
+          cwd: 'src'
           src: ['**/*.coffee']
           dest: 'lib'
           ext: '.js'
         ]
-      bin:
-        files:
-          'bin/leaves': 'src/bin/leaves.coffee'
 
   grunt.registerTask 'default', ['coffee', 'watch']
