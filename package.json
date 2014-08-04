@@ -30,6 +30,8 @@
     "load-grunt-tasks": "^0.6.0"
   },
   "dependencies": {
-    "argparse": "^0.1.15"
+    "argparse": "^0.1.15",
+    "generator-static-website": "^0.2.0",
+    "yeoman-generator": "^0.17.1"
   }
 }

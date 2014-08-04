@@ -1,3 +1,4 @@
+path = require 'path'
 ArgumentParser = require('argparse').ArgumentParser
 
 parser = new ArgumentParser(
@@ -16,5 +17,7 @@ newParser.addArgument ['projectName'],
   action: 'store'
   help: 'Name of the project to create'
 
-args = parser.parseArgs()
-console.log args
+exports.parse = ->
+  args = parser.parseArgs()
+  actionModule = path.join __dirname, args.action
+  require(actionModule).run(args)
