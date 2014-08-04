@@ -24,9 +24,11 @@ newParser.addArgument ['projectName'],
 runParser = newSubParser.addParser 'run', { addHelp: true }
 
 addDefaultArg = ->
+  hasArg = false
   process.argv.forEach (arg) ->
-    return unless arg == 'node' || path.basename(arg) == 'leaves' || arg[0] == '-'
-  process.argv.push defaultAction
+    unless arg == 'node' || path.basename(arg) == 'leaves' || arg[0] == '-'
+      return hasArg = true
+  process.argv.push defaultAction unless hasArg
 
 exports.parse = ->
   addDefaultArg()

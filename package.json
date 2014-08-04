@@ -32,6 +32,7 @@
   "dependencies": {
     "argparse": "^0.1.15",
     "generator-static-website": "^0.2.0",
+    "grunt": "^0.4.5",
     "yeoman-generator": "^0.17.1"
   }
 }
