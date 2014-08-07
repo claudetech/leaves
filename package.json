@@ -1,6 +1,6 @@
 {
   "name": "leaves",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Simple build tool for designers",
   "main": "index.js",
   "bin": {
@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "argparse": "^0.1.15",
-    "generator-static-website": "^0.3.0",
+    "generator-static-website": "^0.4.0",
     "grunt": "^0.4.5",
     "yeoman-generator": "^0.17.1"
   }
