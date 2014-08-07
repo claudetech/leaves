@@ -26,10 +26,10 @@ runParser = newSubParser.addParser 'run', { addHelp: true }
 addDefaultArg = (args) ->
   hasArg = false
   args.forEach (arg) ->
-    unless arg == 'node' || path.basename(arg) == 'leaves' || arg[0] == '-'
+    unless arg == 'node' || path.basename(arg, '.js') == 'leaves' || arg[0] == '-'
       return hasArg = true
   args.push defaultAction unless hasArg
 
-exports.parse = (args=process.argv) ->
-  addDefaultArg args
-  parser.parseArgs args
+exports.parse = (args) ->
+  addDefaultArg args ? process.argv
+  if args? then parser.parseArgs args else parser.parseArgs()
