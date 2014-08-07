@@ -23,15 +23,13 @@ newParser.addArgument ['projectName'],
 
 runParser = newSubParser.addParser 'run', { addHelp: true }
 
-addDefaultArg = ->
+addDefaultArg = (args) ->
   hasArg = false
-  process.argv.forEach (arg) ->
+  args.forEach (arg) ->
     unless arg == 'node' || path.basename(arg) == 'leaves' || arg[0] == '-'
       return hasArg = true
-  process.argv.push defaultAction unless hasArg
+  args.push defaultAction unless hasArg
 
-exports.parse = ->
-  addDefaultArg()
-  args = parser.parseArgs()
-  actionModule = path.join __dirname, args.action
-  require(actionModule).run(args)
+exports.parse = (args=process.argv) ->
+  addDefaultArg args
+  parser.parseArgs args

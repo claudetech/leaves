@@ -7,7 +7,7 @@
     "leaves": "bin/leaves.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --compilers coffee:coffee-script/register -R spec"
   },
   "repository": {
     "type": "git",
@@ -30,7 +30,10 @@
     "grunt-contrib-coffee": "^0.10.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-newer": "^0.7.0",
-    "load-grunt-tasks": "^0.6.0"
+    "load-grunt-tasks": "^0.6.0",
+    "coffee-script": "^1.7.1",
+    "expect.js": "^0.3.1",
+    "mocha": "^1.20.0"
   },
   "dependencies": {
     "argparse": "^0.1.15",

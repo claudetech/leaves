@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
 var path = require('path');
-var libDir = path.join(__dirname, '..', 'lib');
-var cliParser = require(path.join(libDir, 'cli-parser'));
-cliParser.parse();
+var cliParser = require(path.join(path.dirname(__dirname), 'lib', 'cli-parser'));
+var args = cliParser.parse().options;
+require(path.join(path.dirname(__dirname), 'lib', args.action)).run(args);
