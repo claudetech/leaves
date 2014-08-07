@@ -30,6 +30,6 @@ addDefaultArg = (args) ->
       return hasArg = true
   args.push defaultAction unless hasArg
 
-exports.parse = (args) ->
-  addDefaultArg args ? process.argv
-  if args? then parser.parseArgs args else parser.parseArgs()
+exports.parse = (args=process.argv.slice(2)) ->
+  addDefaultArg args
+  parser.parseArgs args
