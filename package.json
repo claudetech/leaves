@@ -37,8 +37,11 @@
   },
   "dependencies": {
     "argparse": "^0.1.15",
+    "errno": "^0.1.1",
     "generator-static-website": "^0.4.0",
     "grunt": "^0.4.5",
+    "npm-web-api": "^0.1.1",
+    "semver": "^3.0.1",
     "yeoman-generator": "^0.17.1"
   }
 }

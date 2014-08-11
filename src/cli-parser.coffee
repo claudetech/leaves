@@ -10,18 +10,20 @@ parser = new ArgumentParser(
   description: 'Generator and build tool for designers.'
 )
 
-newSubParser = parser.addSubparsers(
+actionSubparser = parser.addSubparsers(
   title: 'Actions'
   dest: 'action'
-  default: 'new'
+  default: 'run'
 )
 
-newParser = newSubParser.addParser 'new', { addHelp: true }
+newParser = actionSubparser.addParser 'new', { addHelp: true }
 newParser.addArgument ['projectName'],
   action: 'store'
   help: 'Name of the project to create'
 
-runParser = newSubParser.addParser 'run', { addHelp: true }
+runParser = actionSubparser.addParser 'run', { addHelp: true }
+
+upgradeParser = actionSubparser.addParser 'upgrade', { addHelp: true }
 
 addDefaultArg = (args) ->
   hasArg = false
