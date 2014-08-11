@@ -1,6 +1,6 @@
 {
   "name": "leaves",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Simple build tool for designers",
   "main": "index.js",
   "bin": {
@@ -38,6 +38,7 @@
   "dependencies": {
     "argparse": "^0.1.15",
     "errno": "^0.1.1",
+    "fs-extra": "^0.10.0",
     "generator-static-website": "^0.4.0",
     "grunt": "^0.4.5",
     "npm-web-api": "^0.1.1",
