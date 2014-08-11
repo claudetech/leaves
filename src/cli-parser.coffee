@@ -24,6 +24,13 @@ newParser.addArgument ['projectName'],
 runParser = actionSubparser.addParser 'run', { addHelp: true }
 
 upgradeParser = actionSubparser.addParser 'upgrade', { addHelp: true }
+upgradeParser.addArgument ['-o', '--overwrite'],
+  action: 'storeTrue'
+  help: 'Overwrite Gruntfile.coffee and update package.json in your current project. USE WITH CARE.'
+
+upgradeParser.addArgument ['-s', '--skip-install'],
+  action: 'storeTrue'
+  help: 'Skip NPM install after updating package.json. Do nothing if -o is not on.'
 
 addDefaultArg = (args) ->
   hasArg = false
