@@ -47,3 +47,25 @@ leaves
 ```
 
 (which will run `leaves run`) in your project directory.
+
+## Upgrade
+
+You can upgrade your leaves installation by running
+
+```
+leaves upgrade
+```
+
+This will run `npm update -g leaves` for you and use `sudo` only if needed.
+
+In your working project, you can also run
+
+```
+leaves upgrade -o
+```
+
+to get the latest `Gruntfile.coffee` and update your `package.json`
+dependencies. Your `Gruntfile.coffee` will be overwritten so be
+careful when you use it if you have some changes.
+This will also run `npm install` for you to install the latest
+dependencies.
