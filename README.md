@@ -33,6 +33,16 @@ you can then `cd` in `PROJECT_NAME`.
 Just run
 
 ```
+leaves build
+```
+
+in your project directory.
+
+### Develop
+
+To build and watch your files, run
+
+```
 leaves
 ```
 
