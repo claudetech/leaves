@@ -32,6 +32,8 @@ upgradeParser.addArgument ['-s', '--skip-install'],
   action: 'storeTrue'
   help: 'Skip NPM install after updating package.json. Do nothing if -o is not on.'
 
+buildParser = actionSubparser.addParser 'build', { addHelp: true }
+
 addDefaultArg = (args) ->
   hasArg = false
   args.forEach (arg) ->
