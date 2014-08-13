@@ -9,6 +9,7 @@ npm    = require 'npm'
 libDir = path.dirname(__dirname)
 
 pathResolver = require path.join(libDir, 'path-resolver')
+npmHelpers   = require path.join(libDir, 'npm-helpers')
 
 moduleInfo = require path.join(path.dirname(path.dirname(__dirname)), 'package.json')
 moduleName = moduleInfo.name
@@ -30,12 +31,9 @@ updateProjectFiles = (opts) ->
     globalPackageFile = pathResolver.fileGlobalPath moduleName, "#{globalBasePath}/package.json"
     fs.copySync globalGruntFile, projectGruntFile
     updatePackageDependencies globalPackageFile, projectPackageFile
-    unless opts.skipInstall
-      npm.load {}, (er) ->
-        return unless er == null
-        console.log 'Installing dependencies.'
-        npm.commands.install [], ->
-          console.log "Your project has been updated. You're all done!"
+    unless opts.skip_install
+      npmHelpers.runInstall true, ->
+        console.log "Your project has been updated. You're all done!"
   else
     console.warn "You do not seem to be in a #{moduleName} project, ignoring files upgrade."
 
@@ -54,7 +52,7 @@ runUpdate = (retry, opts) ->
       return runUpdate(false, opts) if code == 3 && retry && process.platform != "win32"
       error = errors.errno[code]
       console.error "The udpate failed with code #{code} (#{error.code}): #{error.description}."
-      console.error "Please try to run the update manually."
+      console.error "Please try to upgrade manually."
     else
       console.log "Great, #{moduleName} has been upgraded!"
       if opts.overwrite
