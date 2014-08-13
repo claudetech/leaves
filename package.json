@@ -1,6 +1,6 @@
 {
   "name": "leaves",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Simple build tool for designers",
   "main": "index.js",
   "bin": {
@@ -44,6 +44,7 @@
     "grunt": "^0.4.5",
     "npm-web-api": "^0.1.1",
     "semver": "^3.0.1",
+    "underscore": "^1.6.0",
     "yeoman-generator": "^0.17.1"
   }
 }
