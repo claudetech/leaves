@@ -6,6 +6,9 @@ as possible, and to use *only* NodeJS tools, with
 no external dependencies. It is built using
 [yeoman](http://yeoman.io/) and [Grunt](http://gruntjs.com/).
 
+Check out [the Yeoman generator][generator-static-website] documentation
+for more information of what you can do in the created project.
+
 ## Installation
 
 To install leaves, run
@@ -69,3 +72,6 @@ dependencies. Your `Gruntfile.coffee` will be overwritten so be
 careful when you use it if you have some changes.
 This will also run `npm install` for you to install the latest
 dependencies.
+
+
+[generator-static-website]: https://github.com/claudetech/generator-static-website
