@@ -1,6 +1,6 @@
 {
   "name": "leaves",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Simple build tool for designers",
   "main": "index.js",
   "bin": {
