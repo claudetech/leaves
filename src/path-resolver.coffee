@@ -1,12 +1,12 @@
+npm = require 'npm'
 path = require 'path'
 
-exports.moduleGlobalPath = (module, env=process) ->
-  prefix = process.config.variables.node_prefix
-  basePath = path.join prefix, 'lib' unless process.platform == 'win32'
-  basePath = path.join basePath, 'node_modules'
-  path.join basePath, module
+npm.load()
 
-exports.fileGlobalPath = (module, file, env=process) ->
-  modulePath = exports.moduleGlobalPath module, env
+exports.moduleGlobalPath = (module) ->
+  path.join npm.globalDir, module
+
+exports.fileGlobalPath = (module, file) ->
+  modulePath = exports.moduleGlobalPath module
   filepath = file.split '/'
   path.join modulePath, filepath...
