@@ -73,5 +73,17 @@ careful when you use it if you have some changes.
 This will also run `npm install` for you to install the latest
 dependencies.
 
+## Publish
+
+You can publish your website to [GitHub Pages][github-pages].
+You only need to have a remote pointing to github.com in your project.
+
+```
+leaves publish
+```
+
+Your website will then be accessible at http://USERNAME.github.io/REPO_NAME.
+
 
 [generator-static-website]: https://github.com/claudetech/generator-static-website
+[github-pages]: https://pages.github.com/
