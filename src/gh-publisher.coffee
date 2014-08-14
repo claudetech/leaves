@@ -7,12 +7,14 @@ grunt      = require 'grunt'
 npmHelpers = require path.join(__dirname, 'npm-helpers')
 
 getRemote = (repo, callback) ->
+  found = false
   repo.listRemotes (err, remotes) ->
     _.each remotes, (remote, i) ->
       repo.showRemote remote, (err, info) ->
         if err == null && /github.com/.exec info.pushUrl
-          callback null, { name: remote, url: info.pushUrl }
-        else if i == (remotes.length - 1)
+          callback null, { name: remote, url: info.pushUrl } unless found
+          found = true
+        else if i == (remotes.length - 1) && !found
           callback "You do not seem to have any Github remotes. Aborting."
 
 removeBranchIfNeeded = (repo, callback) ->
