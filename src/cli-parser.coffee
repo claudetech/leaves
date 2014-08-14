@@ -20,6 +20,10 @@ newParser.addArgument ['projectName'],
   action: 'store'
   help: 'Name of the project to create'
 
+newParser.addArgument ['--css'],
+  action: 'store'
+  help: 'The CSS engine to use: Stylus (default) or less'
+
 watchParser = actionSubparser.addParser 'watch', { addHelp: true }
 
 upgradeParser = actionSubparser.addParser 'upgrade', { addHelp: true }
