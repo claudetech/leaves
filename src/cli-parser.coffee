@@ -9,11 +9,11 @@ parser = new ArgumentParser(
   prog: 'leaves'
   version: moduleInfo.version
   addHelp: true
-  description: 'Generator and build tool for designers.'
+  description: 'Static website generator for designers.'
 )
 
 actionSubparser = parser.addSubparsers(
-  title: 'Actions'
+  title: 'Subcommands'
   dest: 'action'
 )
 
@@ -21,10 +21,19 @@ newParser = actionSubparser.addParser 'new', { addHelp: true }
 newParser.addArgument ['projectName'],
   action: 'store'
   help: 'Name of the project to create'
+  metavar: 'PROJECT_NAME'
 
 newParser.addArgument ['--css'],
   action: 'store'
   help: 'The CSS engine to use: Stylus (default) or less'
+  defaultValue: 'stylus'
+  choices: ['stylus', 'less']
+
+newParser.addArgument ['--html'],
+  action: 'store'
+  help: 'The HTML template engine to use: Jade (default) or EJS'
+  defaultValue: 'jade'
+  choices: ['jade', 'ejs']
 
 watchParser = actionSubparser.addParser 'watch', { addHelp: true }
 
@@ -48,7 +57,7 @@ publishParser.addArgument ['-C', '--skip-commit'],
   help: 'Skip adding/commiting changes before publishing.'
 publishParser.addArgument ['-I', '--skip-install'],
   action: 'storeTrue'
-  help: 'Skip npm install before building. Ignored when --skip-build is active.'
+  help: 'Skip npm install before building. Always true when --skip-build is active.'
 
 addDefaultArg = (args) ->
   hasArg = false

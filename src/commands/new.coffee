@@ -14,4 +14,5 @@ exports.run = (opts) ->
         appname: opts.projectName
         options:
           css: opts.css
+          html: opts.html
     fs.writeFileSync '.leavesrc', JSON.stringify(settings, null, 4)
