@@ -1,5 +1,6 @@
 generator = require('yeoman-generator')()
 path = require 'path'
+fs   = require 'fs'
 
 exports.run = (opts) ->
   oldCwd = process.cwd()
@@ -7,4 +8,10 @@ exports.run = (opts) ->
   generator.lookup()
   process.chdir oldCwd
   args = ['static-website', opts.projectName]
-  generator.run args, opts
+  generator.run args, opts, ->
+    settings =
+      project:
+        appname: opts.projectName
+        options:
+          css: opts.css
+    fs.writeFileSync '.leavesrc', JSON.stringify(settings, null, 4)

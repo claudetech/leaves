@@ -5,6 +5,8 @@ npmapi = require 'npm-web-api'
 semver = require 'semver'
 fs     = require 'fs-extra'
 npm    = require 'npm'
+_      = require 'underscore'
+_.mixin require('underscore.string').exports()
 
 libDir = path.dirname(__dirname)
 
@@ -14,28 +16,39 @@ npmHelpers   = require path.join(libDir, 'npm-helpers')
 moduleInfo = require path.join(path.dirname(path.dirname(__dirname)), 'package.json')
 moduleName = moduleInfo.name
 
-updatePackageDependencies = (src, dest) ->
-  srcInfo = JSON.parse fs.readFileSync(src, 'utf-8')
+templateBasePath = 'node_modules/generator-static-website/app/templates/website'
+
+compileTemplate = (file, config) ->
+  content = fs.readFileSync file, 'utf-8'
+  _.template(content)(config)
+
+updatePackageDependencies = (src, dest, config) ->
+  srcInfo = JSON.parse compileTemplate(src, config)
   info = JSON.parse fs.readFileSync(dest, 'utf-8')
   info.devDependencies = srcInfo.devDependencies
   info.dependencies = srcInfo.dependencies
   fs.writeFileSync dest, JSON.stringify(info, null, 4)
 
 updateProjectFiles = (opts) ->
-  projectGruntFile = path.join(process.cwd(), 'Gruntfile.coffee')
+  projectConfigFile  = path.join(process.cwd(), '.leavesrc')
+  projectGruntFile   = path.join(process.cwd(), 'Gruntfile.coffee')
   projectPackageFile = path.join(process.cwd(), 'package.json')
-  if fs.existsSync(projectGruntFile) && fs.existsSync(projectPackageFile)
+  if fs.existsSync(projectGruntFile) && fs.existsSync(projectPackageFile) && fs.existsSync(projectConfigFile)
     console.log 'Upgrading files in project...'
-    globalBasePath = 'node_modules/generator-static-website/app/templates/website'
-    globalGruntFile = pathResolver.fileGlobalPath moduleName, "#{globalBasePath}/Gruntfile.coffee"
-    globalPackageFile = pathResolver.fileGlobalPath moduleName, "#{globalBasePath}/package.json"
-    fs.copySync globalGruntFile, projectGruntFile
-    updatePackageDependencies globalPackageFile, projectPackageFile
+    config = _.extend JSON.parse(fs.readFileSync(projectConfigFile, 'utf-8')).project, { _: _ }
+
+    globalGruntFile = pathResolver.fileGlobalPath moduleName, "#{templateBasePath}/Gruntfile.coffee"
+    globalPackageFile = pathResolver.fileGlobalPath moduleName, "#{templateBasePath}/package.json"
+
+    fs.writeFileSync projectGruntFile, compileTemplate(globalGruntFile, config)
+    updatePackageDependencies globalPackageFile, projectPackageFile, config
+
     unless opts.skip_install
       npmHelpers.runInstall true, ->
         console.log "Your project has been updated. You're all done!"
   else
     console.warn "You do not seem to be in a #{moduleName} project, ignoring files upgrade."
+    console.warn "If you just upgraded, you probably need .leavesrc file in your project. Please copy it from another project for now."
 
 runUpdate = (retry, opts) ->
   if retry

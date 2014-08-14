@@ -1,11 +1,13 @@
 path = require 'path'
 ArgumentParser = require('argparse').ArgumentParser
 
+moduleInfo = require path.join(path.dirname(__dirname), 'package.json')
+
 defaultAction = 'watch'
 
 parser = new ArgumentParser(
   prog: 'leaves'
-  version: '0.1.0'
+  version: moduleInfo.version
   addHelp: true
   description: 'Generator and build tool for designers.'
 )
