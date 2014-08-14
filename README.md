@@ -31,6 +31,11 @@ leaves new PROJECT_NAME
 
 you can then `cd` in `PROJECT_NAME`.
 
+#### CSS engines
+
+The default engine is [Stylus](http://learnboost.github.io/stylus/).
+Add `--css=less` to use [less css](http://lesscss.org/)
+
 ### Build
 
 Just run
