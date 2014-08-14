@@ -51,7 +51,7 @@ leaves
 
 (which will run `leaves watch`) in your project directory.
 
-## Upgrade
+### Upgrade
 
 You can upgrade your leaves installation by running
 
@@ -73,7 +73,7 @@ careful when you use it if you have some changes.
 This will also run `npm install` for you to install the latest
 dependencies.
 
-## Publish
+### Publish
 
 You can publish your website to [GitHub Pages][github-pages].
 You only need to have a remote pointing to github.com in your project.
