@@ -41,7 +41,7 @@ leaves build
 
 in your project directory.
 
-### Develop
+### Watch
 
 To build and watch your files, run
 
@@ -49,7 +49,7 @@ To build and watch your files, run
 leaves
 ```
 
-(which will run `leaves run`) in your project directory.
+(which will run `leaves watch`) in your project directory.
 
 ## Upgrade
 

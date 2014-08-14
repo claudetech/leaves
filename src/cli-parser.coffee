@@ -1,7 +1,7 @@
 path = require 'path'
 ArgumentParser = require('argparse').ArgumentParser
 
-defaultAction = 'run'
+defaultAction = 'watch'
 
 parser = new ArgumentParser(
   prog: 'leaves'
@@ -13,7 +13,6 @@ parser = new ArgumentParser(
 actionSubparser = parser.addSubparsers(
   title: 'Actions'
   dest: 'action'
-  default: 'run'
 )
 
 newParser = actionSubparser.addParser 'new', { addHelp: true }
@@ -21,7 +20,7 @@ newParser.addArgument ['projectName'],
   action: 'store'
   help: 'Name of the project to create'
 
-runParser = actionSubparser.addParser 'run', { addHelp: true }
+watchParser = actionSubparser.addParser 'watch', { addHelp: true }
 
 upgradeParser = actionSubparser.addParser 'upgrade', { addHelp: true }
 upgradeParser.addArgument ['-o', '--overwrite'],
