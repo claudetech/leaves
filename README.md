@@ -26,7 +26,7 @@ If `npm install` fails, try to use `sudo`.
 To create a new project, just run:
 
 ```
-leaves new PROJECT_NAME
+leaves new PROJECT_NAME [--html=ejs] [--css=less]
 ```
 
 you can then `cd` in `PROJECT_NAME`.
@@ -35,6 +35,11 @@ you can then `cd` in `PROJECT_NAME`.
 
 The default engine is [Stylus](http://learnboost.github.io/stylus/).
 Add `--css=less` to use [less css](http://lesscss.org/)
+
+#### HTML template engines
+
+The default engine is [Jade](http://jade-lang.com/).
+Add `--html=ejs` to use [EJS templates (with layouts)](https://github.com/RandomEtc/ejs-locals)
 
 ### Build
 
@@ -51,7 +56,7 @@ in your project directory.
 To build and watch your files, run
 
 ```
-leaves
+leaves [watch]
 ```
 
 (which will run `leaves watch`) in your project directory.
@@ -61,7 +66,7 @@ leaves
 You can upgrade your leaves installation by running
 
 ```
-leaves upgrade
+leaves upgrade 
 ```
 
 This will run `npm update -g leaves` for you and use `sudo` only if needed.
@@ -84,7 +89,7 @@ You can publish your website to [GitHub Pages][github-pages].
 You only need to have a remote pointing to github.com in your project.
 
 ```
-leaves publish
+leaves publish [--skip-build] [--skip-commit] [--skip-install]
 ```
 
 Your website will then be accessible at http://USERNAME.github.io/REPO_NAME.
