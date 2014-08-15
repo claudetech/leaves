@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <title>Leaves by claudetech</title>
+    <meta name="description" content="Leaves : Simple tool for creating static websites">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Leaves</title>
   </head>
 
   <body>
-    <div id="container">
-      <div class="inner">
 
-        <header>
-          <h1>Leaves</h1>
-          <h2>Simple tool for creating static websites</h2>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/claudetech/leaves">View on GitHub</a>
+
+          <h1 id="project_title">Leaves</h1>
+          <h2 id="project_tagline">Simple tool for creating static websites</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/claudetech/leaves/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/claudetech/leaves/tarball/master">Download this project as a tar.gz file</a>
+            </section>
         </header>
+    </div>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/claudetech/leaves/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/claudetech/leaves/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/claudetech/leaves" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
-
-        <hr>
-
-        <section id="main_content">
-          <p>There are a lot of tools around to generate, build
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>There are a lot of tools around to generate, build
 static websites. leaves is meant to be as simple
 as possible, and to use <em>only</em> NodeJS tools, with
 no external dependencies. It is built using
@@ -58,10 +58,22 @@ for more information of what you can do in the created project.</p>
 
 <p>To create a new project, just run:</p>
 
-<pre><code>leaves new PROJECT_NAME
+<pre><code>leaves new PROJECT_NAME [--html=ejs] [--css=less]
 </code></pre>
 
 <p>you can then <code>cd</code> in <code>PROJECT_NAME</code>.</p>
+
+<h3>
+<a name="css-engines" class="anchor" href="#css-engines"><span class="octicon octicon-link"></span></a>CSS engines</h3>
+
+<p>The default engine is <a href="http://learnboost.github.io/stylus/">Stylus</a>.
+Add <code>--css=less</code> to use <a href="http://lesscss.org/">less css</a></p>
+
+<h3>
+<a name="html-template-engines" class="anchor" href="#html-template-engines"><span class="octicon octicon-link"></span></a>HTML template engines</h3>
+
+<p>The default engine is <a href="http://jade-lang.com/">Jade</a>.
+Add <code>--html=ejs</code> to use <a href="https://github.com/RandomEtc/ejs-locals">EJS templates (with layouts)</a></p>
 
 <h2>
 <a name="build" class="anchor" href="#build"><span class="octicon octicon-link"></span></a>Build</h2>
@@ -78,7 +90,7 @@ for more information of what you can do in the created project.</p>
 
 <p>To build and watch your files, run</p>
 
-<pre><code>leaves
+<pre><code>leaves [watch]
 </code></pre>
 
 <p>(which will run <code>leaves watch</code>) in your project directory.</p>
@@ -88,7 +100,7 @@ for more information of what you can do in the created project.</p>
 
 <p>You can upgrade your leaves installation by running</p>
 
-<pre><code>leaves upgrade
+<pre><code>leaves upgrade 
 </code></pre>
 
 <p>This will run <code>npm update -g leaves</code> for you and use <code>sudo</code> only if needed.</p>
@@ -110,18 +122,22 @@ dependencies.</p>
 <p>You can publish your website to <a href="https://pages.github.com/">GitHub Pages</a>.
 You only need to have a remote pointing to github.com in your project.</p>
 
-<pre><code>leaves publish
+<pre><code>leaves publish [--skip-build] [--skip-commit] [--skip-install]
 </code></pre>
 
 <p>Your website will then be accessible at <a href="http://USERNAME.github.io/REPO_NAME">http://USERNAME.github.io/REPO_NAME</a>.</p>
-        </section>
+      </section>
+    </div>
 
-        <footer>
-          Leaves is maintained by <a href="https://github.com/claudetech">claudetech</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Leaves maintained by <a href="https://github.com/claudetech">claudetech</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
 
-                  <script type="text/javascript">
+              <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -132,7 +148,6 @@ You only need to have a remote pointing to github.com in your project.</p>
             } catch(err) {}
           </script>
 
-      </div>
-    </div>
+
   </body>
 </html>
