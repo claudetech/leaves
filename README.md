@@ -21,6 +21,16 @@ If `npm install` fails, try to use `sudo`.
 
 ## Usage
 
+### Setup
+
+You can run the initial setup to have shell completion by running:
+
+```
+leaves setup
+```
+
+Only zsh is supported for now, but PR are welcome.
+
 ### New project
 
 To create a new project, just run:
