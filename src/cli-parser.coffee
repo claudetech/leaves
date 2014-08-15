@@ -17,7 +17,11 @@ actionSubparser = parser.addSubparsers(
   dest: 'action'
 )
 
-newParser = actionSubparser.addParser 'new', { addHelp: true }
+
+newParser = actionSubparser.addParser 'new',
+  addHelp: true
+  description: 'Create a new project'
+
 newParser.addArgument ['projectName'],
   action: 'store'
   help: 'Name of the project to create'
@@ -35,7 +39,11 @@ newParser.addArgument ['--html'],
   defaultValue: 'jade'
   choices: ['jade', 'ejs']
 
-watchParser = actionSubparser.addParser 'watch', { addHelp: true }
+
+watchParser = actionSubparser.addParser 'watch',
+  addHelp: true
+  description: 'Watch for changes'
+
 
 upgradeParser = actionSubparser.addParser 'upgrade', { addHelp: true }
 upgradeParser.addArgument ['-o', '--overwrite'],
@@ -46,9 +54,16 @@ upgradeParser.addArgument ['-I', '--skip-install'],
   action: 'storeTrue'
   help: 'Skip NPM install after updating package.json. Do nothing if -o is not on.'
 
-buildParser = actionSubparser.addParser 'build', { addHelp: true }
 
-publishParser = actionSubparser.addParser 'publish', { addHelp: true }
+buildParser = actionSubparser.addParser 'build',
+  addHelp: true
+  description: 'Build the project'
+
+
+publishParser = actionSubparser.addParser 'publish',
+  addHelp: true
+  description: 'Publish the project'
+
 publishParser.addArgument ['-B', '--skip-build'],
   action: 'storeTrue'
   help: 'Skip file compile before publishing.'
@@ -58,6 +73,11 @@ publishParser.addArgument ['-C', '--skip-commit'],
 publishParser.addArgument ['-I', '--skip-install'],
   action: 'storeTrue'
   help: 'Skip npm install before building. Always true when --skip-build is active.'
+
+
+setupParser = actionSubparser.addParser 'setup',
+  addHelp: true
+  description: 'Setup leaves'
 
 addDefaultArg = (args) ->
   hasArg = false

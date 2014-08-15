@@ -1,0 +1,54 @@
+#compdef leaves
+#autoload
+
+local -a _1st_arguments
+
+_1st_arguments=(
+  'new:Create a new project'
+  'build:Builds the current project'
+  'watch:Watch the project for changes'
+  'upgrade:Upgarde leaves'
+  'publish:Publish the project to GitHub Pages'
+)
+
+local expl
+
+_arguments \
+  '(-v --version)'{-v,--version}'[show version]' \
+  '(-h --help)'{-h,--help}'[show help]' \
+  '*:: :->subcmds' && return 0
+
+if (( CURRENT == 1 )); then
+  _describe -t commands "leaves subcommand" _1st_arguments
+  return
+fi
+
+case $words[1] in
+  new)
+    _arguments \
+      '(--css)'--css'[Select CSS engine (stylus|less)]:Engine:(stylus less)' \
+      '(--html)'--html'[Select HTML template engine (jade|ejs)]:Engine:(jade ejs)' \
+      '(-h --help)'{-h,--help}'[show help]'
+    ;;
+  build)
+    _arguments \
+      '(-h --help)'{-h,--help}'[show help]'
+    ;;
+  watch)
+    _arguments \
+      '(-h --help)'{-h,--help}'[show help]'
+    ;;
+  publish)
+    _arguments \
+      '(-h --help)'{-h,--help}'[show help]' \
+      '(-B --skip-build)'{-B,--skip-build}'[Skip file compile before publishing.]' \
+      '(-C --skip-commit)'{-C,--skip-commit}'[Skip adding/commiting changes before publishing.]' \
+      '(-I --skip-install)'{-I,--skip-install}'[Skip npm install before building.]'
+    ;;
+  upgrade)
+    _arguments \
+      '(-h --help)'{-h,--help}'[show help]' \
+      '(-o --overwrite)'{-o,--overwrite}'[Overwrite Gruntfile.coffee and update package.json.]' \
+      '(-I --skip-install)'{-I,--skip-install}'[Skip NPM install after updating package.json.]'
+    ;;
+esac

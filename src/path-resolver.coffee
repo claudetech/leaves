@@ -1,8 +1,6 @@
 npm = require 'npm'
 path = require 'path'
 
-npm.load()
-
 exports.moduleGlobalPath = (module) ->
   path.join npm.globalDir, module
 
