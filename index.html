@@ -31,10 +31,10 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <p>There are a lot of tools around to generate, build
+        <p>There are a lot of tools around to create
 static websites. leaves is meant to be as simple
-as possible, and to use <em>only</em> NodeJS tools, with
-no external dependencies. It is built using
+as possible, and uses only NodeJS tools, with
+no other external dependencies. It is built using
 <a href="http://yeoman.io/">yeoman</a> and <a href="http://gruntjs.com/">Grunt</a>.</p>
 
 <p>Check out <a href="https://github.com/claudetech/generator-static-website">the Yeoman generator</a> documentation
@@ -60,8 +60,8 @@ for more information of what you can do in the created project.</p>
 
 <p>To install leaves, run</p>
 
-<pre><code>npm install -g leaves
-</code></pre>
+<div class="highlight highlight-sh"><pre><span class="nv">$ </span>npm install -g leaves
+</pre></div>
 
 <p>If <code>npm install</code> fails, try to use <code>sudo</code>.</p>
 
@@ -73,8 +73,8 @@ for more information of what you can do in the created project.</p>
 
 <p>You can run the initial setup to have shell completion by running:</p>
 
-<pre><code>leaves setup
-</code></pre>
+<div class="highlight highlight-sh"><pre><span class="nv">$ </span>leaves setup
+</pre></div>
 
 <p>Only zsh is supported for now, but PR are welcome.</p>
 
@@ -83,8 +83,8 @@ for more information of what you can do in the created project.</p>
 
 <p>To create a new project, just run:</p>
 
-<pre><code>leaves new PROJECT_NAME [--html=ejs] [--css=less]
-</code></pre>
+<div class="highlight highlight-sh"><pre><span class="nv">$ </span>leaves new PROJECT_NAME <span class="o">[</span>--html<span class="o">=</span>ejs<span class="o">]</span> <span class="o">[</span>--css<span class="o">=</span>less<span class="o">]</span>
+</pre></div>
 
 <p>you can then <code>cd</code> in <code>PROJECT_NAME</code>.</p>
 
@@ -105,8 +105,8 @@ Add <code>--html=ejs</code> to use <a href="https://github.com/RandomEtc/ejs-loc
 
 <p>Just run</p>
 
-<pre><code>leaves build
-</code></pre>
+<div class="highlight highlight-sh"><pre><span class="nv">$ </span>leaves build
+</pre></div>
 
 <p>in your project directory.</p>
 
@@ -115,8 +115,8 @@ Add <code>--html=ejs</code> to use <a href="https://github.com/RandomEtc/ejs-loc
 
 <p>To build and watch your files, run</p>
 
-<pre><code>leaves [watch]
-</code></pre>
+<div class="highlight highlight-sh"><pre><span class="nv">$ </span>leaves <span class="o">[</span>watch<span class="o">]</span>
+</pre></div>
 
 <p>(which will run <code>leaves watch</code>) in your project directory.</p>
 
@@ -125,15 +125,15 @@ Add <code>--html=ejs</code> to use <a href="https://github.com/RandomEtc/ejs-loc
 
 <p>You can upgrade your leaves installation by running</p>
 
-<pre><code>leaves upgrade 
-</code></pre>
+<div class="highlight highlight-sh"><pre><span class="nv">$ </span>leaves upgrade 
+</pre></div>
 
 <p>This will run <code>npm update -g leaves</code> for you and use <code>sudo</code> only if needed.</p>
 
 <p>In your working project, you can also run</p>
 
-<pre><code>leaves upgrade -o
-</code></pre>
+<div class="highlight highlight-sh"><pre><span class="nv">$ </span>leaves upgrade -o
+</pre></div>
 
 <p>to get the latest <code>Gruntfile.coffee</code> and update your <code>package.json</code>
 dependencies. Your <code>Gruntfile.coffee</code> will be overwritten so be
@@ -147,8 +147,8 @@ dependencies.</p>
 <p>You can publish your website to <a href="https://pages.github.com/">GitHub Pages</a>.
 You only need to have a remote pointing to github.com in your project.</p>
 
-<pre><code>leaves publish [--skip-build] [--skip-commit] [--skip-install]
-</code></pre>
+<div class="highlight highlight-sh"><pre><span class="nv">$ </span>leaves publish <span class="o">[</span>--skip-build<span class="o">]</span> <span class="o">[</span>--skip-commit<span class="o">]</span> <span class="o">[</span>--skip-install<span class="o">]</span>
+</pre></div>
 
 <p>Your website will then be accessible at <a href="http://USERNAME.github.io/REPO_NAME">http://USERNAME.github.io/REPO_NAME</a>.</p>
       </section>
