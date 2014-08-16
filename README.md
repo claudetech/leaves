@@ -1,4 +1,6 @@
-# leaves - Easy project generation for designers
+# leaves - Simple tool for creating static websites
+
+[Full documentation](http://claudetech.github.io/leaves)
 
 There are a lot of tools around to generate, build
 static websites. leaves is meant to be as simple
@@ -8,6 +10,16 @@ no external dependencies. It is built using
 
 Check out [the Yeoman generator][generator-static-website] documentation
 for more information of what you can do in the created project.
+
+## Main functionalities
+
+* HTML templating via [Jade](http://jade-lang.com/) (default) or [EJS](https://github.com/RandomEtc/ejs-locals)
+* CSS templating via [Stylus](http://learnboost.github.io/stylus/) (default) or [less](http://lesscss.org/)
+* CoffeeScript compilation
+* Project watch and livereload
+* Compile error displayed in browser
+* Single command deploy to GitHub pages
+* Misc: `leaves` shell completion, project single command upgrade
 
 ## Installation
 
