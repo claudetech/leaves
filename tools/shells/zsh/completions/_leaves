@@ -26,8 +26,8 @@ fi
 case $words[1] in
   new)
     _arguments \
-      '(--css)'--css'[Select CSS engine (stylus|less)]:Engine:(stylus less)' \
-      '(--html)'--html'[Select HTML template engine (jade|ejs)]:Engine:(jade ejs)' \
+      '(--css)'--css='[Select CSS engine (stylus|less)]:Engine:(stylus less)' \
+      '(--html)'--html='[Select HTML template engine (jade|ejs)]:Engine:(jade ejs)' \
       '(-h --help)'{-h,--help}'[show help]'
     ;;
   build)
