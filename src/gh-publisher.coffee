@@ -75,10 +75,10 @@ exports.publishToRemote = (repo, remote, options, callback) ->
   [options, callback] = [{}, options] if _.isFunction(options)
   switchBranch repo, (err) ->
     newCallback = -> doPublish(repo, remote, options, callback)
-    if options.skip_build
+    if options.skipBuild
       newCallback()
     else
-      unless options.skip_install
+      unless options.skipInstall
         npmHelpers.runInstall false, ->
           grunt.tasks 'compile:dev', {}, newCallback
 

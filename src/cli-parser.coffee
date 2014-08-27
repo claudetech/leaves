@@ -64,16 +64,23 @@ publishParser = actionSubparser.addParser 'publish',
   addHelp: true
   description: 'Publish the project'
 
+publishParser.addArgument ['-p', '--provider'],
+  action: 'store'
+  help: 'Choose provider to publish. Default "heroku".'
+  defaultValue: 'heroku'
+  choices: ['heroku', 'github']
 publishParser.addArgument ['-B', '--skip-build'],
   action: 'storeTrue'
   help: 'Skip file compile before publishing.'
+  dest: 'skipBuild'
 publishParser.addArgument ['-C', '--skip-commit'],
   action: 'storeTrue'
   help: 'Skip adding/commiting changes before publishing.'
+  dest: 'skipCommit'
 publishParser.addArgument ['-I', '--skip-install'],
   action: 'storeTrue'
   help: 'Skip npm install before building. Always true when --skip-build is active.'
-
+  dest: 'skipInstall'
 
 setupParser = actionSubparser.addParser 'setup',
   addHelp: true
