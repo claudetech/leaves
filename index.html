@@ -144,13 +144,18 @@ dependencies.</p>
 <h2>
 <a name="publish" class="anchor" href="#publish"><span class="octicon octicon-link"></span></a>Publish</h2>
 
-<p>You can publish your website to <a href="https://pages.github.com/">GitHub Pages</a>.
-You only need to have a remote pointing to github.com in your project.</p>
+<p>You can publish your website to <a href="https://www.heroku.com/">Heroku</a> or to <a href="https://pages.github.com/">GitHub Pages</a>.</p>
 
-<div class="highlight highlight-sh"><pre><span class="nv">$ </span>leaves publish <span class="o">[</span>--skip-build<span class="o">]</span> <span class="o">[</span>--skip-commit<span class="o">]</span> <span class="o">[</span>--skip-install<span class="o">]</span>
+<p>To publish to Heroku, you only need to have a valid account.
+To publish to Github, you need to have a remote pointing to github.com in your project.</p>
+
+<div class="highlight highlight-sh"><pre><span class="nv">$ </span>leaves publish <span class="o">[</span>--skip-build<span class="o">]</span> <span class="o">[</span>--skip-commit<span class="o">]</span> <span class="o">[</span>--skip-install<span class="o">]</span> <span class="o">[</span>-p PROVIDER<span class="o">]</span>
 </pre></div>
 
-<p>Your website will then be accessible at <a href="http://USERNAME.github.io/REPO_NAME">http://USERNAME.github.io/REPO_NAME</a>.</p>
+<p><code>PROVIDER</code> parameter can be <code>github</code> or <code>heroku</code>. The default is <code>heroku</code>.</p>
+
+<p>Your website will then be accessible at <a href="http://APP_NAME.herokuapp.com">http://APP_NAME.herokuapp.com</a> when publishing with Heroku and <a href="http://USERNAME.github.io/REPO_NAME">http://USERNAME.github.io/REPO_NAME</a>. with GitHub Pages.
+For heroku, <code>APP_NAME</code> will default to the appName in <code>.leavesrc</code>.</p>
       </section>
     </div>
 
