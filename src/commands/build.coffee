@@ -1,4 +1,6 @@
-grunt = require 'grunt'
+grunt      = require 'grunt'
+npmHelpers = require '../npm-helpers'
 
 exports.run = (opts) ->
-  grunt.tasks 'compile:dev'
+  npmHelpers.runInstall false, ->
+    grunt.tasks 'compile:dev'
