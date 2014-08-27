@@ -107,15 +107,20 @@ dependencies.
 
 ### Publish
 
-You can publish your website to [GitHub Pages][github-pages].
-You only need to have a remote pointing to github.com in your project.
+You can publish your website to [Heroku][heroku] or to [GitHub Pages][github-pages].
+
+To publish to Heroku, you only need to have a valid account.
+To publish to Github, you need to have a remote pointing to github.com in your project.
 
 ```sh
-$ leaves publish [--skip-build] [--skip-commit] [--skip-install]
+$ leaves publish [--skip-build] [--skip-commit] [--skip-install] [-p PROVIDER]
 ```
 
-Your website will then be accessible at http://USERNAME.github.io/REPO_NAME.
+`PROVIDER` parameter can be `github` or `heroku`. The default is `heroku`.
 
+Your website will then be accessible at http://APP_NAME.herokuapp.com when publishing with Heroku and http://USERNAME.github.io/REPO_NAME. with GitHub Pages.
+For heroku, `APP_NAME` will default to the appName in `.leavesrc`.
 
 [generator-static-website]: https://github.com/claudetech/generator-static-website
 [github-pages]: https://pages.github.com/
+[heroku]: https://www.heroku.com/
