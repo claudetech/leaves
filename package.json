@@ -1,6 +1,6 @@
 {
   "name": "leaves",
-  "version": "0.12.2",
+  "version": "0.12.3",
   "description": "Simple tool for creating static websites",
   "main": "index.js",
   "bin": {
@@ -42,7 +42,7 @@
     "generator-static-website": "^0.10.4",
     "git-cli": "^0.5.0",
     "grunt": "^0.4.5",
-    "heroku-publisher": "^0.1.10",
+    "heroku-publisher": "^0.1.11",
     "npm-web-api": "^0.1.1",
     "semver": "^3.0.1",
     "underscore": "^1.6.0",

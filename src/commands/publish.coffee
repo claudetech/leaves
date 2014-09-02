@@ -25,7 +25,7 @@ tryCompile = (options, callback) ->
 publishHeroku = (options) ->
   config = fs.readJSONSync path.join(process.cwd(), '.leavesrc')
   appName = config.herokuAppName || config.appName || process.cwd()
-  options = { retry: true, appName: appName }
+  options = { retry: true, appName: appName, build: 'leaves build' }
   tryCompile options, ->
     herokuPublisher.publish options, (err, app) ->
       return console.warn(err) unless err is null
