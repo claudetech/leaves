@@ -8,6 +8,7 @@ exports.run = (opts) ->
   generator.lookup()
   process.chdir oldCwd
   args = ['static-website', opts.projectName]
+  opts['save-config'] = false
   generator.run args, opts, ->
     settings =
       project:
@@ -15,5 +16,4 @@ exports.run = (opts) ->
         options:
           css: opts.css
           html: opts.html
-          'save-config': false
     fs.writeFileSync '.leavesrc', JSON.stringify(settings, null, 4)
