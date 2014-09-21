@@ -156,6 +156,36 @@ To publish to Github, you need to have a remote pointing to github.com in your p
 
 <p>Your website will then be accessible at <a href="http://APP_NAME.herokuapp.com">http://APP_NAME.herokuapp.com</a> when publishing with Heroku and <a href="http://USERNAME.github.io/REPO_NAME">http://USERNAME.github.io/REPO_NAME</a>. with GitHub Pages.
 For heroku, <code>APP_NAME</code> will default to the appName in <code>.leavesrc</code>.</p>
+
+<h2>
+<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h2>
+
+<p>Leaves can be used as a wrapper around <a href="http://bower.io/">bower</a> and <a href="https://www.npmjs.org/">npm</a>.</p>
+
+<div class="highlight highlight-sh"><pre><span class="nv">$ </span>leaves install <span class="o">[</span>PACKAGES <span class="o">[</span>-p PROVIDER<span class="o">]</span> <span class="o">[</span>--no-save<span class="o">]]</span>
+</pre></div>
+
+<p>If no package is given, leaves will run <code>npm install</code> and <code>bower install</code>.</p>
+
+<p>If packages are given, <code>PROVIDER</code> can be either <code>bower</code> or <code>npm</code>. If provider is not given, it will default to <code>bower</code>.</p>
+
+<p>New packages are installed using <code>--save</code> by default. You can disable this
+behavior by passing <code>--no-save</code>.</p>
+
+<h2>
+<a name="get" class="anchor" href="#get"><span class="octicon octicon-link"></span></a>Get</h2>
+
+<p>Fetch and prepare project for development.
+This will run <code>git clone</code>, <code>npm install</code>, <code>bower install</code> and <code>leaves build</code>
+in the project.</p>
+
+<div class="highlight highlight-sh"><pre><span class="nv">$ </span>leaves get GIT_REPOSITORY <span class="o">[</span>-p PROTOCOL<span class="o">]</span>
+</pre></div>
+
+<p><code>GIT_REPOSITORY</code> can be anyting that would work with <code>git clone</code>,
+or for GitHub repositories, the short syntax <code>user/repo</code> can be used.
+<code>PROTOCOL</code> is only relevant when using the short syntax, and can be
+<code>https</code> (default) or <code>ssh</code>.</p>
       </section>
     </div>
 
