@@ -9,7 +9,8 @@ _1st_arguments=(
   'watch:Watch the project for changes'
   'upgrade:Upgarde leaves'
   'publish:Publish the project to GitHub Pages'
-  'install:Install dependencies in the project.'
+  'install:Install dependencies in the project'
+  'get:Fetch and prepare leaves project'
 )
 
 local expl
