@@ -34,3 +34,9 @@ exports.install = (args, options, provider, callback) ->
     exports.bowerInstall args, options, callback
   else
     exports.npmInstall args, options, callback
+
+exports.installAll = (callback) ->
+  exports.npmInstall (err) ->
+    return callback(err) unless err is null
+    exports.bowerInstall (err) ->
+      callback(err)

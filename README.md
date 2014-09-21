@@ -136,6 +136,19 @@ If packages are given, `PROVIDER` can be either `bower` or `npm`. If provider is
 New packages are installed using `--save` by default. You can disable this
 behavior by passing `--no-save`.
 
+### Get
+
+Fetch and prepare project for development.
+
+```sh
+$ leaves get GIT_REPOSITORY [-p PROTOCOL]
+```
+
+`GIT_REPOSITORY` can be anyting that would work with `git clone`,
+or for GitHub repositories, the short syntax `user/repo` can be used.
+`PROTOCOL` is only relevant when using the short syntax, and can be
+`https` (default) or `ssh`.
+
 
 [generator-static-website]: https://github.com/claudetech/generator-static-website
 [github-pages]: https://pages.github.com/

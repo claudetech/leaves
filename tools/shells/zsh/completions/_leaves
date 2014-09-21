@@ -58,4 +58,9 @@ case $words[1] in
       '(-p --provider)'{-p,--provider}='[Select the provider (bower|npm)]:Provider:(bower npm)' \
       '(-S --no-save)'{-S,--no-save}'[Avoid saving dependencies to settings file.]' \
     ;;
+  get)
+    _arguments \
+      '(-h --help)'{-h,--help}'[show help]' \
+      '(-p --protocol)'{-p,--protocol}='[Select the protocol to clone the repository (https|ssh)]:Protocol:(https ssh)' \
+    ;;
 esac

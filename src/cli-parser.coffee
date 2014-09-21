@@ -114,6 +114,22 @@ installParser.addArgument ['-S', '--no-save'],
   dest: 'save'
   defaultValue: true
 
+getParser = actionSubparser.addParser 'get',
+  addHelp: true
+  description: 'Fetch and prepare leaves project.'
+
+getParser.addArgument ['repository'],
+  action: 'store'
+  help: 'Git repository URL for the project'
+  metavar: 'REPOSITORY'
+
+getParser.addArgument ['-p', '--protocol'],
+  action: 'store'
+  dest: 'protocol'
+  help: 'Choose the protocol to clone directory.'
+  defaultValue: 'https'
+  choices: ['https', 'ssh']
+
 addDefaultArg = (args) ->
   hasArg = false
   args.forEach (arg) ->
