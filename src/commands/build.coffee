@@ -1,8 +1,8 @@
 fs         = require 'fs-extra'
 grunt      = require 'grunt'
-npmHelpers = require '../npm-helpers'
+deps       = require '../deps'
 
 exports.run = (opts) ->
-  npmHelpers.runInstall false, ->
+  deps.npmInstall ->
     fs.removeSync 'public' if fs.existsSync 'public'
     grunt.tasks 'compile:dev'

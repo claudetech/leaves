@@ -4,7 +4,7 @@ path       = require 'path'
 fs         = require 'fs-extra'
 grunt      = require 'grunt'
 
-npmHelpers = require path.join(__dirname, 'npm-helpers')
+deps       = require './deps'
 
 getRemote = (repo, callback) ->
   found = false
@@ -79,7 +79,7 @@ exports.publishToRemote = (repo, remote, options, callback) ->
       newCallback()
     else
       unless options.skipInstall
-        npmHelpers.runInstall false, ->
+        deps.npmInstall ->
           grunt.tasks 'compile:dev', {}, newCallback
 
 exports.publish = (repoPath, options, callback) ->

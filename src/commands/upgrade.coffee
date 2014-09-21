@@ -11,7 +11,7 @@ _.mixin require('underscore.string').exports()
 libDir = path.dirname(__dirname)
 
 pathResolver = require path.join(libDir, 'path-resolver')
-npmHelpers   = require path.join(libDir, 'npm-helpers')
+deps   = '../deps'
 
 moduleInfo = require path.join(path.dirname(path.dirname(__dirname)), 'package.json')
 moduleName = moduleInfo.name
@@ -44,7 +44,7 @@ updateProjectFiles = (opts) ->
     updatePackageDependencies globalPackageFile, projectPackageFile, config
 
     unless opts.skip_install
-      npmHelpers.runInstall true, ->
+      deps.npmInstall { verbose: true }, ->
         console.log "Your project has been updated. You're all done!"
   else
     console.warn "You do not seem to be in a #{moduleName} project, ignoring files upgrade."

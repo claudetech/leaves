@@ -3,7 +3,8 @@ npm  = require 'npm'
 fs   = require 'fs-extra'
 
 libDir = path.dirname(__dirname)
-pathResolver = require path.join(libDir, 'path-resolver')
+pathResolver = require '../path-resolver'
+deps = require '../deps'
 
 setupZsh = ->
   home  = process.env.HOME
@@ -27,3 +28,7 @@ exports.run = (opts) ->
   shell = process.env.SHELL
   if shell? && shell.indexOf('zsh') > -1
     setupZsh()
+
+  unless opts.skipInstall
+    deps.npmInstall ['bower', 'grunt-cli'], { global: true },  ->
+      console.log 'Installed bower and grunt-cli.'

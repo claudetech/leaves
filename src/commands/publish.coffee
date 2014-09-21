@@ -2,7 +2,7 @@ fs              = require 'fs-extra'
 path            = require 'path'
 herokuPublisher = require 'heroku-publisher'
 grunt           = require 'grunt'
-npmHelpers      = require '../npm-helpers'
+deps            = require '../deps'
 ghPublisher     = require '../gh-publisher'
 
 publishGithub = (opts) ->
@@ -20,7 +20,7 @@ tryCompile = (options, callback) ->
     if options.skipInstall
       cb()
     else
-      npmHelpers.runInstall false, cb
+      deps.npmInstall cb
 
 publishHeroku = (options) ->
   config = fs.readJSONSync path.join(process.cwd(), '.leavesrc')

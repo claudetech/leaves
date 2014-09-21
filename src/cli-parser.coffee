@@ -86,6 +86,28 @@ setupParser = actionSubparser.addParser 'setup',
   addHelp: true
   description: 'Setup leaves'
 
+setupParser.addArgument ['-I', '--skip-install'],
+  action: 'storeTrue'
+  help: 'Skip bower and grunt-cli install.'
+  dest: 'skipInstall'
+
+installParser = actionSubparser.addParser 'install',
+  addHelp: true
+  description: 'Install dependencies'
+
+installParser.addArgument ['-p', '--provider'],
+  action: 'store'
+  help: 'Choose provider to install dependencies. Default "bower".'
+  defaultValue: 'bower'
+  choices: ['bower', 'npm']
+
+installParser.addArgument ['packages'],
+  action: 'store'
+  help: 'Name of the project to create'
+  metavar: 'PACKAGES'
+  nargs: '*'
+  defaultValue: []
+
 addDefaultArg = (args) ->
   hasArg = false
   args.forEach (arg) ->

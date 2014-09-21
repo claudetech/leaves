@@ -9,6 +9,7 @@ _1st_arguments=(
   'watch:Watch the project for changes'
   'upgrade:Upgarde leaves'
   'publish:Publish the project to GitHub Pages'
+  'install:Install dependencies in the project.'
 )
 
 local expl
@@ -50,5 +51,10 @@ case $words[1] in
       '(-h --help)'{-h,--help}'[show help]' \
       '(-o --overwrite)'{-o,--overwrite}'[Overwrite Gruntfile.coffee and update package.json.]' \
       '(-I --skip-install)'{-I,--skip-install}'[Skip NPM install after updating package.json.]'
+    ;;
+  install)
+    _arguments \
+      '(-h --help)'{-h,--help}'[show help]' \
+      '(-p --provider)'{-p,--provider}='[Select the provider (bower|npm)]:Provider:(bower npm)' \
     ;;
 esac
