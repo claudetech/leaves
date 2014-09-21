@@ -10,6 +10,6 @@ exports.run = (opts) ->
       deps.bowerInstall (err) ->
         console.log if err is null then 'bower dependencies installed' else err
   else
-    deps.install opts.packages, { save: true }, opts.provider, (err) ->
+    deps.install opts.packages, { save: opts.save }, opts.provider, (err) ->
       msg = "Dependencies have been installed using #{opts.provider}."
       console.log if err is null then msg else err

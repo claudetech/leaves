@@ -25,6 +25,7 @@ exports.npmInstall = (args, options, callback) ->
   [args, options, callback] = getArgs(args, options, callback)
   console.log 'Installing dependencies.' if options.verbose
   npm.config.set 'global', true if options.global
+  npm.config.set 'save', true if options.save
   npm.commands.install args, callback
 
 exports.install = (args, options, provider, callback) ->

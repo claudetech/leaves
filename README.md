@@ -121,6 +121,24 @@ $ leaves publish [--skip-build] [--skip-commit] [--skip-install] [-p PROVIDER]
 Your website will then be accessible at http://APP_NAME.herokuapp.com when publishing with Heroku and http://USERNAME.github.io/REPO_NAME. with GitHub Pages.
 For heroku, `APP_NAME` will default to the appName in `.leavesrc`.
 
+### Install
+
+Leaves can be used as a wrapper around [bower][bower] and [npm][npm].
+
+```sh
+$ leaves install [PACKAGES [-p PROVIDER] [--no-save]]
+```
+
+If no package is given, leaves will run `npm install` and `bower install`.
+
+If packages are given, `PROVIDER` can be either `bower` or `npm`. If provider is not given, it will default to `bower`.
+
+New packages are installed using `--save` by default. You can disable this
+behavior by passing `--no-save`.
+
+
 [generator-static-website]: https://github.com/claudetech/generator-static-website
 [github-pages]: https://pages.github.com/
 [heroku]: https://www.heroku.com/
+[bower]: http://bower.io/
+[npm]: https://www.npmjs.org/

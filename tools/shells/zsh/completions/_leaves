@@ -56,5 +56,6 @@ case $words[1] in
     _arguments \
       '(-h --help)'{-h,--help}'[show help]' \
       '(-p --provider)'{-p,--provider}='[Select the provider (bower|npm)]:Provider:(bower npm)' \
+      '(-S --no-save)'{-S,--no-save}'[Avoid saving dependencies to settings file.]' \
     ;;
 esac

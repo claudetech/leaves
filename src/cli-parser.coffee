@@ -103,10 +103,16 @@ installParser.addArgument ['-p', '--provider'],
 
 installParser.addArgument ['packages'],
   action: 'store'
-  help: 'Name of the project to create'
+  help: 'Name of the packages to install'
   metavar: 'PACKAGES'
   nargs: '*'
   defaultValue: []
+
+installParser.addArgument ['-S', '--no-save'],
+  action: 'storeFalse'
+  help: 'Avoid adding dependencies to bower.json or package.json'
+  dest: 'save'
+  defaultValue: true
 
 addDefaultArg = (args) ->
   hasArg = false
