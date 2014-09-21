@@ -8,10 +8,9 @@ npm    = require 'npm'
 _      = require 'underscore'
 _.mixin require('underscore.string').exports()
 
-libDir = path.dirname(__dirname)
-
-pathResolver = require path.join(libDir, 'path-resolver')
-deps   = '../deps'
+pathResolver = require '../path-resolver'
+deps         = require '../deps'
+shell        = require '../shell'
 
 moduleInfo = require path.join(path.dirname(path.dirname(__dirname)), 'package.json')
 moduleName = moduleInfo.name
@@ -51,6 +50,7 @@ updateProjectFiles = (opts) ->
     console.warn "If you just upgraded, you probably need .leavesrc file in your project. Please copy it from another project for now."
 
 runUpdate = (retry, opts) ->
+  shell.copyZshSetup()
   if retry
     command = 'npm'
     npmOptions = ['update', '-g', moduleName]
