@@ -7,7 +7,7 @@ _          = require 'underscore'
 _.mixin require('underscore.string').exports()
 
 exports.getUrl = (repo, opts={}) ->
-  match = /^([a-zA-Z0-9].+?)\/([a-zA-Z0-9].+?)$/.exec repo
+  match = /^([a-zA-Z0-9_-]+?)\/([a-zA-Z0-9_-]+?)$/.exec repo
   return repo if match is null
   if opts.protocol == 'ssh'
     "git@github.com:#{match[1]}/#{match[2]}.git"
