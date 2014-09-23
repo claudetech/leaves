@@ -1,6 +1,6 @@
 {
   "name": "leaves",
-  "version": "0.14.5",
+  "version": "0.14.6",
   "description": "Simple tool for creating static websites",
   "main": "index.js",
   "bin": {
