@@ -1,6 +1,7 @@
-_    = require 'underscore'
+_     = require 'underscore'
+grunt = require 'grunt'
 
-deps = require '../deps'
+deps  = require '../deps'
 
 exports.run = (opts) ->
   if _.isEmpty(opts.packages)
