@@ -59,6 +59,9 @@ buildParser = actionSubparser.addParser 'build',
   addHelp: true
   description: 'Build the project'
 
+buildParser.addArgument ['-p', '--production'],
+  action: 'storeTrue'
+  help: 'Builds for production (concat+minifiy)'
 
 publishParser = actionSubparser.addParser 'publish',
   addHelp: true
@@ -81,6 +84,10 @@ publishParser.addArgument ['-I', '--skip-install'],
   action: 'storeTrue'
   help: 'Skip npm install before building. Always true when --skip-build is active.'
   dest: 'skipInstall'
+publishParser.addArgument ['-d', '--use-dev'],
+  action: 'storeTrue'
+  help: 'Use development build instead of production build.'
+  dest: 'useDev'
 
 setupParser = actionSubparser.addParser 'setup',
   addHelp: true

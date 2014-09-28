@@ -16,7 +16,8 @@ tryCompile = (options, callback) ->
   if options.skipBuild
     callback()
   else
-    cb = -> grunt.tasks 'compile:dev', {}, callback
+    task = if options.useDev then 'compile:dev' else 'compile:dist'
+    cb = -> grunt.tasks 'compile:dist', {}, callback
     if options.skipInstall
       cb()
     else
@@ -25,7 +26,7 @@ tryCompile = (options, callback) ->
 publishHeroku = (options) ->
   config = fs.readJSONSync path.join(process.cwd(), '.leavesrc')
   appName = config.herokuAppName || config.appName || process.cwd()
-  options = { retry: true, appName: appName, build: 'leaves build' }
+  options = { retry: true, appName: appName, build: 'leaves build --production' }
   tryCompile options, ->
     herokuPublisher.publish options, (err, app) ->
       return console.warn(err) unless err is null

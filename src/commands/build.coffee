@@ -4,5 +4,5 @@ deps       = require '../deps'
 
 exports.run = (opts) ->
   deps.npmInstall ->
-    fs.removeSync 'public' if fs.existsSync 'public'
-    grunt.tasks 'compile:dev'
+    task = if opts.production then 'compile:dist'  else 'compile:dev'
+    grunt.tasks task

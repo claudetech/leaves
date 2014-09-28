@@ -78,9 +78,14 @@ exports.publishToRemote = (repo, remote, options, callback) ->
     if options.skipBuild
       newCallback()
     else
-      unless options.skipInstall
+      cb = ->
+        task = if options.useDev then 'compile:dev' else 'compile:dist'
+        grunt.tasks task, {}, newCallback
+      if options.skipInstall
+        cb()
+      else
         deps.npmInstall ->
-          grunt.tasks 'compile:dev', {}, newCallback
+          cb()
 
 exports.publish = (repoPath, options, callback) ->
   [options, callback] = [{}, options] if _.isFunction(options)
