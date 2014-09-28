@@ -32,21 +32,21 @@ switchBranch = (repo, callback) ->
       repo.currentBranch (err, branch) ->
         callback err
 
-cleanupDir = (directoryPath) ->
-  toKeep = ['public', 'node_modules', '.git', '.gitignore']
+cleanupDir = (directoryPath, publicDir) ->
+  toKeep = [publicDir, 'node_modules', '.git', '.gitignore']
   _.each fs.readdirSync(directoryPath), (file) ->
     fs.removeSync path.join(directoryPath, file) unless file in toKeep
 
 
-prepareDir = (directoryPath) ->
-  cleanupDir directoryPath
-  files = fs.readdirSync path.join(directoryPath, 'public')
+prepareDir = (directoryPath, publicDir) ->
+  cleanupDir directoryPath, publicDir
+  files = fs.readdirSync path.join(directoryPath, publicDir)
   _.each files, (file) ->
-    fs.renameSync path.join(directoryPath, 'public', file), file
-  fs.removeSync path.join(directoryPath, 'public')
+    fs.renameSync path.join(directoryPath, publicDir, file), file
+  fs.removeSync path.join(directoryPath, publicDir)
 
-checkFiles = (repoPath) ->
-  unless fs.existsSync path.join(repoPath, 'public', 'index.html')
+checkFiles = (repoPath, publicDir) ->
+  unless fs.existsSync path.join(repoPath, publicDir, 'index.html')
     return "You do not seem to have a 'index.html' file in your public directory. Aborting."
   null
 
@@ -65,9 +65,10 @@ finalizePublish = (repo, remote, options, callback) ->
         callback err, remote.url
 
 doPublish = (repo, remote, options, callback) ->
-  err = checkFiles(repo.workingDir())
+  publicDir = if options.useDev then 'public' else 'dist'
+  err = checkFiles(repo.workingDir(), publicDir)
   return callback(err) unless err == null
-  prepareDir repo.workingDir()
+  prepareDir repo.workingDir(), publicDir
   commitIfNeeded repo, ->
     finalizePublish repo, remote, options, callback
 
