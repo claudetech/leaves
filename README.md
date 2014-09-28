@@ -17,6 +17,7 @@ for more information of what you can do in the created project.
 * CSS templating via [Stylus](http://learnboost.github.io/stylus/) (default) or [less](http://lesscss.org/)
 * CoffeeScript compilation
 * Project watch and livereload
+* Scripts and stylesheets globbing with `**/*.js` like syntax
 * Compile error displayed in browser
 * Single command deploy to GitHub pages
 * Misc: lorem-ipsum generator, `leaves` shell completion, project single command upgrade
@@ -31,7 +32,7 @@ $ npm install -g leaves
 
 If `npm install` fails, try to use `sudo`.
 
-## Usage
+## Commands
 
 ### Setup
 
@@ -68,10 +69,10 @@ Add `--html=ejs` to use [EJS templates (with layouts)](https://github.com/Random
 Just run
 
 ```sh
-$ leaves build
+$ leaves build [--production]
 ```
 
-in your project directory.
+in your project directory. For production build, add the `--production` flag.
 
 ### Watch
 
@@ -113,10 +114,11 @@ To publish to Heroku, you only need to have a valid account.
 To publish to Github, you need to have a remote pointing to github.com in your project.
 
 ```sh
-$ leaves publish [--skip-build] [--skip-commit] [--skip-install] [-p PROVIDER]
+$ leaves publish [--skip-build] [--skip-commit] [--skip-install] [--use-dev] [-p PROVIDER]
 ```
 
 `PROVIDER` parameter can be `github` or `heroku`. The default is `heroku`.
+If you want to use the development build to deploy, pass `--use-dev`.
 
 Your website will then be accessible at http://APP_NAME.herokuapp.com when publishing with Heroku and http://USERNAME.github.io/REPO_NAME. with GitHub Pages.
 For heroku, `APP_NAME` will default to the appName in `.leavesrc`.
@@ -149,9 +151,83 @@ or for GitHub repositories, the short syntax `user/repo` can be used.
 `PROTOCOL` is only relevant when using the short syntax, and can be
 `https` (default) or `ssh`.
 
+## Other functionalities
+
+### Easy lorem ipsum generation
+
+The function `lorem` is available in all templates.
+Just call
+
+```jade
+= lorem(10)
+```
+
+and you will get 10 words of lorem ipsum.
+For other options, see the action [package documentation][node-lorem-ipsum]
+
+### `script` and `link` globbing
+
+To avoid having to insert all scripts in your layout,
+you can use glob syntax.
+
+```jade
+html
+  head
+    script(glob="js/**/*.js")
+    link(rel="stylesheet" glob="css/**/*.css")
+```
+
+will become
+
+```html
+<html>
+<head>
+  <script src="js/app.js">
+  <script src="js/other.js">
+  <script src="css/main.css">
+  <script src="css/other.css">
+</head>
+<body>
+</body>
+</html>
+```
+
+for development build and
+
+```html
+<html>
+<head>
+  <script src="js/application.min.js">
+  <script src="css/application.min.css">
+</head>
+<body>
+</body>
+</html>
+```
+
+for production build, where `js/application.min.js` and
+`css/application.min.css` will be concatenated and
+minified versions of the globbed files.
+
+If alphabetical order does not fit your need, you can
+use
+
+```jade
+html
+  head
+    script(src="js/this-one-is-first.js" group="application")
+    script(glob="js/**/*.js")
+    link(rel="stylesheet" glob="css/**/*.css")
+```
+
+The files will always be concatenated in order of appearance.
+The default group is called `application`, but you can use any. All files
+in the same group will be concatenated together and ignored from
+globbing if already included.
 
 [generator-static-website]: https://github.com/claudetech/generator-static-website
 [github-pages]: https://pages.github.com/
 [heroku]: https://www.heroku.com/
 [bower]: http://bower.io/
 [npm]: https://www.npmjs.org/
+[node-lorem-ipsum]: https://github.com/knicklabs/lorem-ipsum.js
