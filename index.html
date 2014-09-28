@@ -50,6 +50,7 @@ for more information of what you can do in the created project.</p>
 </li>
 <li>CoffeeScript compilation</li>
 <li>Project watch and livereload</li>
+<li>Scripts and stylesheets globbing with <code>**/*.js</code> like syntax</li>
 <li>Compile error displayed in browser</li>
 <li>Single command deploy to GitHub pages</li>
 <li>Misc: lorem-ipsum generator, <code>leaves</code> shell completion, project single command upgrade</li>
@@ -66,7 +67,7 @@ for more information of what you can do in the created project.</p>
 <p>If <code>npm install</code> fails, try to use <code>sudo</code>.</p>
 
 <h1>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h1>
+<a name="commands" class="anchor" href="#commands"><span class="octicon octicon-link"></span></a>Commands</h1>
 
 <h2>
 <a name="setup" class="anchor" href="#setup"><span class="octicon octicon-link"></span></a>Setup</h2>
@@ -105,10 +106,10 @@ Add <code>--html=ejs</code> to use <a href="https://github.com/RandomEtc/ejs-loc
 
 <p>Just run</p>
 
-<div class="highlight highlight-sh"><pre><span class="nv">$ </span>leaves build
+<div class="highlight highlight-sh"><pre><span class="nv">$ </span>leaves build <span class="o">[</span>--production<span class="o">]</span>
 </pre></div>
 
-<p>in your project directory.</p>
+<p>in your project directory. For production build, add the <code>--production</code> flag.</p>
 
 <h2>
 <a name="watch" class="anchor" href="#watch"><span class="octicon octicon-link"></span></a>Watch</h2>
@@ -152,7 +153,8 @@ To publish to Github, you need to have a remote pointing to github.com in your p
 <div class="highlight highlight-sh"><pre><span class="nv">$ </span>leaves publish <span class="o">[</span>--skip-build<span class="o">]</span> <span class="o">[</span>--skip-commit<span class="o">]</span> <span class="o">[</span>--skip-install<span class="o">]</span> <span class="o">[</span>-p PROVIDER<span class="o">]</span>
 </pre></div>
 
-<p><code>PROVIDER</code> parameter can be <code>github</code> or <code>heroku</code>. The default is <code>heroku</code>.</p>
+<p><code>PROVIDER</code> parameter can be <code>github</code> or <code>heroku</code>. The default is <code>heroku</code>.
+If you want to use the development build to deploy, pass <code>--use-dev</code>.</p>
 
 <p>Your website will then be accessible at <a href="http://APP_NAME.herokuapp.com">http://APP_NAME.herokuapp.com</a> when publishing with Heroku and <a href="http://USERNAME.github.io/REPO_NAME">http://USERNAME.github.io/REPO_NAME</a>. with GitHub Pages.
 For heroku, <code>APP_NAME</code> will default to the appName in <code>.leavesrc</code>.</p>
@@ -186,6 +188,78 @@ in the project.</p>
 or for GitHub repositories, the short syntax <code>user/repo</code> can be used.
 <code>PROTOCOL</code> is only relevant when using the short syntax, and can be
 <code>https</code> (default) or <code>ssh</code>.</p>
+
+<h1>
+<a name="other-functionalities" class="anchor" href="#other-functionalities"><span class="octicon octicon-link"></span></a>Other functionalities</h1>
+
+<h2>
+<a name="easy-lorem-ipsum-generation" class="anchor" href="#easy-lorem-ipsum-generation"><span class="octicon octicon-link"></span></a>Easy lorem ipsum generation</h2>
+
+<p>The function <code>lorem</code> is available in all templates.
+Just call</p>
+
+<div class="highlight highlight-slim"><pre><span class="p">=</span> <span class="n">lorem</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+<p>and you will get 10 words of lorem ipsum.
+For other options, see the action <a href="https://github.com/knicklabs/lorem-ipsum.js">package documentation</a></p>
+
+<h2>
+<a name="script-and-link-globbing" class="anchor" href="#script-and-link-globbing"><span class="octicon octicon-link"></span></a>script and link globbing</h2>
+
+<p>To avoid having to insert all scripts in your layout,
+you can use glob syntax.</p>
+
+<div class="highlight highlight-jade"><pre><span class="nt">html</span>
+  <span class="nt">head</span>
+    <span class="nt">script</span>(<span class="na">glob=</span><span class="s">"js/**/*.js"</span>)
+    <span class="nt">link</span>(<span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">glob=</span><span class="s">"css/**/*.css"</span>)
+</pre></div>
+
+<p>will become</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/app.js"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/other.js"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"css/main.css"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"css/other.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+
+<p>for development build and</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/application.min.js"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"css/application.min.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+
+<p>for production build, where <code>js/application.min.js</code> and
+<code>css/application.min.css</code> will be concatenated and
+minified versions of the globbed files.</p>
+
+<p>If alphabetical order does not fit your need, you can
+use</p>
+
+<div class="highlight highlight-jade"><pre><span class="nt">html</span>
+  <span class="nt">head</span>
+    <span class="nt">script</span>(<span class="na">src=</span><span class="s">"js/this-one-is-first.js"</span> <span class="na">group=</span><span class="s">"application"</span>)
+    <span class="nt">script</span>(<span class="na">glob=</span><span class="s">"js/**/*.js"</span>)
+    <span class="nt">link</span>(<span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">glob=</span><span class="s">"css/**/*.css"</span>)
+</pre></div>
+
+<p>The files will always be concatenated in order of appearance.
+The default group is called <code>application</code>, but you can use any. All files
+in the same group will be concatenated together and ignored from
+globbing if already included.</p>
       </section>
     </div>
 
