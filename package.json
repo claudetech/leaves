@@ -1,7 +1,7 @@
 {
   "name": "leaves",
-  "version": "0.15.1",
-  "description": "Simple tool for creating static websites",
+  "version": "0.15.2",
+  "description": "Productivity tool for frontend engineers",
   "main": "index.js",
   "bin": {
     "leaves": "bin/leaves.js"

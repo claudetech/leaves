@@ -1,9 +1,10 @@
-# leaves - Simple tool for creating static websites
+# leaves - Productivity tool for frontend engineers
 
 [Full documentation](http://claudetech.github.io/leaves)
 
 There are a lot of tools around to create
-static websites. leaves is meant to be as simple
+static websites and single page applications.
+leaves is meant to be as simple
 as possible, and to use *only* NodeJS tools, with
 no other external dependencies. It is built using
 [yeoman](http://yeoman.io/) and [Grunt](http://gruntjs.com/).
@@ -19,7 +20,7 @@ for more information of what you can do in the created project.
 * Project watch and livereload
 * Scripts and stylesheets globbing with `**/*.js` like syntax
 * Compile error displayed in browser
-* Single command deploy to GitHub pages
+* Single command deploy to Heroku and GitHub pages
 * Misc: lorem-ipsum generator, `leaves` shell completion, project single command upgrade
 
 ## Installation
