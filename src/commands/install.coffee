@@ -7,7 +7,9 @@ exports.run = (opts) ->
     [args, options] = [[], {}]
     deps.installAll (err) ->
       console.log if err is null then 'Dependencies have been installed' else err
+      grunt.tasks 'compile:dev' if err is null
   else
     deps.install opts.packages, { save: opts.save }, opts.provider, (err) ->
       msg = "Dependencies have been installed using #{opts.provider}."
       console.log if err is null then msg else err
+      grunt.tasks 'compile:dev' if err is null
