@@ -47,7 +47,6 @@ updateProjectFiles = (opts) ->
         console.log "Your project has been updated. You're all done!"
   else
     console.warn "You do not seem to be in a #{moduleName} project, ignoring files upgrade."
-    console.warn "If you just upgraded, you probably need .leavesrc file in your project. Please copy it from another project for now."
 
 runUpdate = (retry, opts) ->
   shell.copyZshSetup()
