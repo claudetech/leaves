@@ -62,6 +62,12 @@ buildParser = actionSubparser.addParser 'build',
 buildParser.addArgument ['-p', '--production'],
   action: 'storeTrue'
   help: 'Builds for production (concat+minifiy)'
+  defaultValue: true
+
+buildParser.addArgument ['-d', '--development'],
+  action: 'storeFalse'
+  help: 'Builds for development (no concat/minify)'
+  dest: 'production'
 
 publishParser = actionSubparser.addParser 'publish',
   addHelp: true
