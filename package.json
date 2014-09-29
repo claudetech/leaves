@@ -1,6 +1,6 @@
 {
   "name": "leaves",
-  "version": "0.15.6",
+  "version": "0.16.0",
   "description": "Productivity tool for frontend engineers",
   "main": "index.js",
   "bin": {
@@ -39,7 +39,7 @@
     "argparse": "^0.1.15",
     "errno": "^0.1.1",
     "fs-extra": "^0.10.0",
-    "generator-static-website": "^0.11.3",
+    "generator-static-website": "^0.12.0",
     "git-cli": "^0.5.0",
     "grunt": "^0.4.5",
     "heroku-publisher": "^0.1.13",
