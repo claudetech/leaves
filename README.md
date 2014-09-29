@@ -70,10 +70,12 @@ Add `--html=ejs` to use [EJS templates (with layouts)](https://github.com/Random
 Just run
 
 ```sh
-$ leaves build [--production]
+$ leaves build [--development]
 ```
 
-in your project directory. For production build, add the `--production` flag.
+in your project directory.
+If you want a development build, without
+concatenation and minification, pass the `development` flag.
 
 ### Watch
 
