@@ -54,6 +54,7 @@ updateProjectFiles = (opts) ->
     config = _.extend JSON.parse(fs.readFileSync(projectConfigFile, 'utf-8')).project, { _: _ }
 
     globalGruntFile = pathResolver.fileGlobalPath moduleName, "#{templateBasePath}/website/Gruntfile.coffee"
+    globalGruntFile = pathResolver.fileGlobalPath moduleName, "#{templateBasePath}/common/Gruntfile.coffee" unless fs.existsSync(globalGruntFile)
     globalPackageFile = pathResolver.fileGlobalPath moduleName, "#{templateBasePath}/website/package.json"
     globalGitignore = pathResolver.fileGlobalPath moduleName, "#{templateBasePath}/common/gitignore"
 
