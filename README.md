@@ -9,9 +9,6 @@ as possible, and to use *only* NodeJS tools, with
 no other external dependencies. It is built using
 [yeoman](http://yeoman.io/) and [Grunt](http://gruntjs.com/).
 
-Check out [the Yeoman generator][generator-static-website] documentation
-for more information of what you can do in the created project.
-
 ## Main functionalities
 
 * HTML templating via [Jade](http://jade-lang.com/) (default) or [EJS](https://github.com/RandomEtc/ejs-locals)
@@ -45,7 +42,7 @@ $ leaves setup
 
 Only zsh is supported for now, but PR are welcome.
 
-### New project
+### New
 
 To create a new project, just run:
 
@@ -227,6 +224,7 @@ The files will always be concatenated in order of appearance.
 The default group is called `application`, but you can use any. All files
 in the same group will be concatenated together and ignored from
 globbing if already included.
+Check out [the documentation][node-glob-html] for more details.
 
 [generator-static-website]: https://github.com/claudetech/generator-static-website
 [github-pages]: https://pages.github.com/
@@ -234,3 +232,4 @@ globbing if already included.
 [bower]: http://bower.io/
 [npm]: https://www.npmjs.org/
 [node-lorem-ipsum]: https://github.com/knicklabs/lorem-ipsum.js
+[node-glob-html]: https://github.com/claudetech/node-glob-html
