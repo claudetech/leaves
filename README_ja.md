@@ -1,50 +1,51 @@
 # leaves - Productivity tool for frontend engineers
 
-leavesは静的サイトやシングルページアプリケーションを
-作るための開発ツールです。NodeJSの上で動いており、
-他の依存関係が一切ありません。
-[yeoman](http://yeoman.io/)と[Grunt](http://gruntjs.com/)を使って
-作られています。
+leavesは静的なサイトやシングルページアプリケーションを作るための開発ツールです。
+NodeJS上で動いており、他との依存関係はありません。
+[yeoman](http://yeoman.io/)と[Grunt](http://gruntjs.com/)を使って作られています。
 
 ## 機能一覧
 
-* [Jade](http://jade-lang.com/)(デフォルト)か[EJS](https://github.com/RandomEtc/ejs-locals)を用いたHTMLテンプレート
-* [Stylus](http://learnboost.github.io/stylus/)(デフォルト)か[less](http://lesscss.org/)を用いたCSSテンプレート
+* [Jade](http://jade-lang.com/)や[EJS](https://github.com/RandomEtc/ejs-locals)を用いたHTMLテンプレート
+* [Stylus](http://learnboost.github.io/stylus/)や[less](http://lesscss.org/)を用いたCSSテンプレート
 * [CoffeeScript](http://coffeescript.org/)のコンパイル
-* プロジェクトの監視と自動更新
+* プロジェクトの変更監視とブラウザの自動更新
 * スクリプトとスタイルシートの自動インクルード
-* ブラウザでコンパイルエラー表示
+* ブラウザ画面上でのコンパイルエラー表示
 * 1つのコマンドでHerokuとGitHubページにデプロイ
 * その他: lorem-ipsumジェネレーター, シェル補完, 簡単アップグレード
 
 ## インストール
 
-Leavesをインストールするために、次のコマンドを実行してください。
-To install leaves, run
+Leavesのインストールは、以下のコマンドで行えます。
 
-許可のエラーが発生したら、`sudo`で試して下さい。
+```sh
+$ npm install -g leaves
+```
+
+パーミッション関連のエラーが発生した場合は、`sudo`をコマンドの先頭に付加した上で実行して下さい。
 
 ## コマンド
 
 ### Setup
 
-シェルの補完を有効にするために、次のコマンドを実行してください。
+シェルの補完を有効にしたい場合は次のコマンドを実行してください。
 
 ```sh
 $ leaves setup
 ```
 
-現在、zshのみ対応しているが、PRを歓迎しています。
+現在はzshにのみ対応しておりますが、PRは大歓迎です。
 
 ### New
 
-新規プロジェクトを作成するために、次のコマンドを実行してください。
+新規プロジェクトを作成する場合は次のコマンドを実行してください。
 
 ```sh
 $ leaves new PROJECT_NAME [--html=ejs] [--css=less]
 ```
 
-その後`PROJECT_NAME`に`cd`してください。
+その後`PROJECT_NAME`に`cd`し、開発を始めましょう。
 
 #### CSSエンジン
 
@@ -54,21 +55,22 @@ $ leaves new PROJECT_NAME [--html=ejs] [--css=less]
 #### HTMLテンプレートエンジン
 
 デフォルトのエンジンは[Jade](http://jade-lang.com/)です。
-[EJS templates (with layouts)](https://github.com/RandomEtc/ejs-locals)を使う場合は`leaves new`に``--html=ejs`を追加してください。
+[EJS templates (with layouts)](https://github.com/RandomEtc/ejs-locals)を使う場合は`leaves new`コマンドを実行する際に、`--html=ejs`を追加してください。
 
 ### Build
 
-ビルドするために、プロジェクトのディレクトリから次のコマンドを実行してください。
+各ファイルを一括でコンパイルする場合は、プロジェクトのディレクトリから次のコマンドを実行してください。
 
 ```sh
 $ leaves build [--development]
 ```
 
-開発モードでビルドするために、`--development`を追加してください。
+コマンドの末尾に`--development`を追加すると開発モードになります。
+この場合は、通常ビルド時に行われるファイルの軽量化と結合を行いません。
 
 ### Watch
 
-プロジェクトを監視するために、プロジェクトのディレクトリから次のコマンドを実行してください。
+プロジェクトを監視し、各ファイルの変更をブラウザ画面に自動で反映させたい場合はプロジェクトのディレクトリから次のコマンドを実行してください。
 
 ```sh
 $ leaves [watch]
@@ -76,7 +78,7 @@ $ leaves [watch]
 
 ### Upgrade
 
-leavesをアップグレードするために、次のコマンドを実行してください。
+leavesをアップグレードする場合は次のコマンドを実行してください。
 
 ```sh
 $ leaves upgrade
@@ -88,39 +90,39 @@ $ leaves upgrade
 $ leaves upgrade -o
 ```
 
-を実行すると、`package.json`も更新されます。
+を実行すると、`package.json`も一緒に更新されます。
 
 ### Publish
 
-[Heroku][heroku]か[GitHub Pages][github-pages]にウェブサイトが公開できます。
+作ったサイトを[Heroku][heroku]か[GitHub Pages][github-pages]に公開することができます。
 
-Herokuに公開するために、Herokuのアカウントが必要です。
-Githubに公開するために、github.comを指しているgitのリモートが必要です。
+Herokuに公開する場合はHerokuのアカウントが必要です。
+また、Githubで公開する場合は、Github上にリモートリポジトリを作成する必要があります。
 
 ```sh
 $ leaves publish [--skip-build] [--skip-commit] [--skip-install] [--use-dev] [-p PROVIDER]
 ```
 
-`PROVIDER`を`github`か`heroku`が使えます。デフォルトは`heroku`です。
-開発モード（結合と圧縮なし）を公開するために、`--use-dev`をつけてください。
+`PROVIDER`として`github`か`heroku`を指定することができます。デフォルトは`heroku`です。
+ビルド時のファイル軽量化と結合を行わずに公開する場合は、`--use-dev`をつけてください。
 
-Herofuの場合、http://APP_NAME.herokuapp.com で公開されます。
-Github Pagesの場合、http://USERNAME.github.io/REPO_NAME に公開されます。
+Herokuの場合、http://APP_NAME.herokuapp.com というURLで公開されます。
+Github Pagesの場合、http://USERNAME.github.io/REPO_NAME というURLで公開されます。
 
 ### Install
 
-Leavesを使って[bower][bower]と[npm][npm]でライブラリをインストールできます。
+Leavesを使用して[bower][bower]や[npm][npm]を使用したライブラリのインストールが行えます。
 
 ```sh
 $ leaves install [PACKAGES [-p PROVIDER] [--no-save]]
 ```
 
-パッケージが指定されていないない時は`npm install`と`bower install`が実行されます。
+パッケージが指定されていない時は`npm install`と`bower install`が実行されます。
 
-パッケージがある時は、`PROVIDER`を`bower`か`npm`にできます。デフォルトは`bower`です。
+パッケージが指定されている場合は、`PROVIDER`を`bower`か`npm`にできます。デフォルトは`bower`です。
 
-新しいパッケージはbowerとnpmの`--save`オプションを使って入ります。
-その挙動を避けるために、`--no-save`を付けてください。
+新しいパッケージはbowerとnpmの`--save`オプションを使って入れることができます。
+`bower.json`に依存関係を書き込まないようにしたい場合は、`--no-save`をコマンドに付けてください。
 
 ### Get
 
@@ -132,7 +134,7 @@ $ leaves get GIT_REPOSITORY [-p PROTOCOL]
 
 `GIT_REPOSITORY`は`git clone`で使えるものは何でも指定できます。
 また、Githubレポジトリの場合、`ユーザ名/レポジトリ名`のような文法も使えます。
-この文法を使う時、`PROTOCOL`として`https`(デフォルト)か`ssh`を指定できます。
+このコマンドを使う時は`PROTOCOL`として、`https`(デフォルト)か`ssh`を指定できます。
 
 ## その他の機能
 
@@ -145,11 +147,11 @@ $ leaves get GIT_REPOSITORY [-p PROTOCOL]
 ```
 
 でlorem ipsumのランダムな10単語が生成されます。
-オプションについては[パケージのドキュメンテーション][node-lorem-ipsum]をご覧くさい。
+オプションについては[パッケージのドキュメンテーション][node-lorem-ipsum]をご覧ください。
 
 ### スクリプトとスタイルシートの自動インクルード
 
-レイアウトですべてのスクリプトを入れないように、次の文法を使うことができます。
+レイアウトで大量のスクリプトを読み込む手間を省くため、次のように書くことができます。
 
 ```jade
 html
@@ -158,7 +160,7 @@ html
     link(rel="stylesheet" src="css/**/*.css" glob)
 ```
 
-以上の入力から、開発ビルドの場合は次の出力が生成されます。
+開発ビルドの場合は、上記のコードで次のようなHTMLが生成されます。
 
 ```html
 <html>
@@ -173,7 +175,7 @@ html
 </html>
 ```
 
-プロダクションビルドで次の出力が生成されます。
+プロダクションビルドで次のように生成されます。
 
 ```html
 <html>
@@ -186,10 +188,10 @@ html
 </html>
 ```
 
-`application.min.js`と`application.min.css`は結合と圧縮されたファイルです。
+`application.min.js`と`application.min.css`は結合と圧縮がなされたファイルです。
 
-ファイルは辞書順で結合されますが、別の順番が使いたい場合は`glob`をつけて
-HTMLで追加すれば良いです。
+ファイルは辞書順で結合されますが、別の順番で機能を使いたい場合は
+以下の例を参考に、タグに`glob`をつけてHTML上で指定してください。
 
 
 ```jade
@@ -200,7 +202,7 @@ html
     link(rel="stylesheet" href="css/**/*.css" glob)
 ```
 
-以上のような場合では、HTMLでの順番が優先されます。
+この場合ではHTML上での順番が優先されます。
 また、同じファイルは一度しかインクルードされません。
 より詳しい使い方については、[ドキュメンテーション][node-glob-html]をご覧ください。
 
