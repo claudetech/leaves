@@ -1,4 +1,4 @@
-# Leaves - Productivity tool for frontend engineers
+# Leaves - デザイナーの開発ツール
 
 Leavesは静的なサイトやシングルページアプリケーションを作るための開発ツールです。
 NodeJS上で動いており、他との依存関係はありません。

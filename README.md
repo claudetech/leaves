@@ -1,4 +1,4 @@
-# leaves - デザイナーの開発ツール
+# leaves - Productivity tool for frontend engineers
 
 [Full documentation](http://claudetech.github.io/leaves)
 
