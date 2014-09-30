@@ -117,11 +117,14 @@ To publish to Github, you need to have a remote pointing to github.com in your p
 $ leaves publish [--skip-build] [--skip-commit] [--skip-install] [--use-dev] [-p PROVIDER]
 ```
 
-`PROVIDER` parameter can be `github` or `heroku`. The default is `heroku`.
+`PROVIDER` parameter can be `github` , `heroku` or `ftp`. The default is `heroku`.
 If you want to use the development build to deploy, pass `--use-dev`.
 
 Your website will then be accessible at http://APP_NAME.herokuapp.com when publishing with Heroku and http://USERNAME.github.io/REPO_NAME. with GitHub Pages.
 For heroku, `APP_NAME` will default to the appName in `.leavesrc`.
+
+For FTP, you will be asked for your credentials, which will be
+stored in `.leavesrc.local`.
 
 ### Install
 

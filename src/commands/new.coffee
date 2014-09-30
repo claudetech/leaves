@@ -10,6 +10,7 @@ exports.run = (opts) ->
   args = ['static-website', opts.projectName]
   opts['save-config'] = false
   opts['gruntfile-path'] = '.gruntfile.coffee'
+  opts['is-leaves'] = true
   generator.run args, opts, ->
     settings =
       project:
@@ -18,3 +19,4 @@ exports.run = (opts) ->
           css: opts.css
           html: opts.html
     fs.writeFileSync '.leavesrc', JSON.stringify(settings, null, 4)
+    fs.writeFileSync '.leavesrc.local', JSON.stringify({}, null, 4)
