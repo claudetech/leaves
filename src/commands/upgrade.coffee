@@ -24,8 +24,9 @@ compileTemplate = (file, config) ->
 updatePackageDependencies = (src, dest, config) ->
   srcInfo = JSON.parse compileTemplate(src, config)
   info = JSON.parse fs.readFileSync(dest, 'utf-8')
-  info.devDependencies = srcInfo.devDependencies
-  info.dependencies = srcInfo.dependencies
+  _.each ['devDependencies', 'dependencies'], (key) ->
+    _.each srcInfo[key], (version, dep) ->
+      info[key][dep] = version
   fs.writeFileSync dest, JSON.stringify(info, null, 4)
 
 updateGitignore = (src, dest) ->
@@ -42,10 +43,10 @@ updateGitignore = (src, dest) ->
     fs.writeFileSync dest, newContent.join('\n')
 
 
-
 updateProjectFiles = (opts) ->
   projectConfigFile  = path.join(process.cwd(), '.leavesrc')
   projectGruntFile   = path.join(process.cwd(), 'Gruntfile.coffee')
+  projectGruntFile   = path.join(process.cwd(), '.gruntfile.coffee') unless fs.existsSync(projectGruntFile)
   projectPackageFile = path.join(process.cwd(), 'package.json')
   projectGitignore   = path.join(process.cwd(), '.gitignore')
   if fs.existsSync(projectGruntFile) && fs.existsSync(projectPackageFile) && fs.existsSync(projectConfigFile)
