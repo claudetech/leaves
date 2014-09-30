@@ -1,6 +1,6 @@
-# leaves - Productivity tool for frontend engineers
+# Leaves - Productivity tool for frontend engineers
 
-leavesは静的なサイトやシングルページアプリケーションを作るための開発ツールです。
+Leavesは静的なサイトやシングルページアプリケーションを作るための開発ツールです。
 NodeJS上で動いており、他との依存関係はありません。
 [yeoman](http://yeoman.io/)と[Grunt](http://gruntjs.com/)を使って作られています。
 
@@ -78,7 +78,7 @@ $ leaves [watch]
 
 ### Upgrade
 
-leavesをアップグレードする場合は次のコマンドを実行してください。
+Leavesをアップグレードする場合は次のコマンドを実行してください。
 
 ```sh
 $ leaves upgrade
@@ -134,7 +134,7 @@ $ leaves get GIT_REPOSITORY [-p PROTOCOL]
 
 `GIT_REPOSITORY`は`git clone`で使えるものは何でも指定できます。
 また、Githubレポジトリの場合、`ユーザ名/レポジトリ名`のような文法も使えます。
-このコマンドを使う時は`PROTOCOL`として、`https`(デフォルト)か`ssh`を指定できます。
+その際は`PROTOCOL`として、`https`(デフォルト)か`ssh`を指定できます。
 
 ## その他の機能
 
@@ -151,7 +151,7 @@ $ leaves get GIT_REPOSITORY [-p PROTOCOL]
 
 ### スクリプトとスタイルシートの自動インクルード
 
-レイアウトで大量のスクリプトを読み込む手間を省くため、次のように書くことができます。
+レイアウトで大量のスクリプトを読み込ませる手間を省くため、次のように書くことができます。
 
 ```jade
 html
