@@ -173,8 +173,8 @@ you can use glob syntax.
 ```jade
 html
   head
-    script(glob="js/**/*.js")
-    link(rel="stylesheet" glob="css/**/*.css")
+    script(src="js/**/*.js" glob)
+    link(rel="stylesheet" href="css/**/*.css" glob)
 ```
 
 will become
@@ -209,21 +209,21 @@ for production build, where `js/application.min.js` and
 `css/application.min.css` will be concatenated and
 minified versions of the globbed files.
 
+#### Files order
+
 If alphabetical order does not fit your need, you can
-use
+use glob on single files, it will be inserted only once in the output.
 
 ```jade
 html
   head
-    script(src="js/this-one-is-first.js" group="application")
-    script(glob="js/**/*.js")
-    link(rel="stylesheet" glob="css/**/*.css")
+    script(src="js/this-one-is-first.js" glob)
+    script(src="js/**/*.js" glob)
+    link(rel="stylesheet" href="css/**/*.css" glob)
 ```
 
 The files will always be concatenated in order of appearance.
-The default group is called `application`, but you can use any. All files
-in the same group will be concatenated together and ignored from
-globbing if already included.
+
 Check out [the documentation][node-glob-html] for more details.
 
 [generator-static-website]: https://github.com/claudetech/generator-static-website
