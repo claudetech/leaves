@@ -35,8 +35,8 @@ updateGitignore = (src, dest) ->
   else
     content = []
   toAdd = []
-  _.each fs.readFileSync(src, 'utf-8').split('\n'), (f) ->
-    toAdd.push(f) unless content.indexOf(f) > -1
+  _.each compileTemplate(src, {options: {'is-leaves': true}}).split('\n'), (f) ->
+    toAdd.push(f) unless _.isEmpty(f) || content.indexOf(f) > -1
   if toAdd.length > 0
     toAdd.push('')
     newContent = content.concat(toAdd)
