@@ -1,10 +1,11 @@
 Repository = require('git-cli').Repository
-grunt      = require 'grunt'
 path       = require 'path'
-deps       = require '../deps'
 npm        = require 'npm'
 _          = require 'underscore'
 _.mixin require('underscore.string').exports()
+
+grunt      = require '../grunt'
+deps       = require '../deps'
 
 exports.getUrl = (repo, opts={}) ->
   match = /^([a-zA-Z0-9_-]+?)\/([a-zA-Z0-9_-]+?)$/.exec repo

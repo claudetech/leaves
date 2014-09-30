@@ -9,6 +9,7 @@ exports.run = (opts) ->
   process.chdir oldCwd
   args = ['static-website', opts.projectName]
   opts['save-config'] = false
+  opts['gruntfile-path'] = '.gruntfile.coffee'
   generator.run args, opts, ->
     settings =
       project:

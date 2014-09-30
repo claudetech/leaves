@@ -1,4 +1,4 @@
-grunt = require 'grunt'
+grunt = require '../grunt'
 
 exports.run = (opts) ->
   grunt.tasks [], { force: true }

@@ -2,7 +2,7 @@ _          = require 'underscore'
 Repository = require('git-cli').Repository
 path       = require 'path'
 fs         = require 'fs-extra'
-grunt      = require 'grunt'
+grunt      = require './grunt'
 
 deps       = require './deps'
 

@@ -1,6 +1,6 @@
 _     = require 'underscore'
-grunt = require 'grunt'
 
+grunt = require '../grunt'
 deps  = require '../deps'
 
 exports.run = (opts) ->

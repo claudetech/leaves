@@ -1,5 +1,5 @@
 fs         = require 'fs-extra'
-grunt      = require 'grunt'
+grunt      = require '../grunt'
 deps       = require '../deps'
 
 exports.run = (opts) ->

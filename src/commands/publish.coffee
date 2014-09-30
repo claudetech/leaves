@@ -1,7 +1,7 @@
 fs              = require 'fs-extra'
 path            = require 'path'
 herokuPublisher = require 'heroku-publisher'
-grunt           = require 'grunt'
+grunt           = require '../grunt'
 deps            = require '../deps'
 ghPublisher     = require '../gh-publisher'
 
