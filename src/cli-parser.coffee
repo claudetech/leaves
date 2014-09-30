@@ -77,7 +77,7 @@ publishParser.addArgument ['-p', '--provider'],
   action: 'store'
   help: 'Choose provider to publish. Default "heroku".'
   defaultValue: 'heroku'
-  choices: ['heroku', 'github']
+  choices: ['heroku', 'github', 'ftp']
 publishParser.addArgument ['-B', '--skip-build'],
   action: 'storeTrue'
   help: 'Skip file compile before publishing.'
@@ -94,6 +94,10 @@ publishParser.addArgument ['-d', '--use-dev'],
   action: 'storeTrue'
   help: 'Use development build instead of production build.'
   dest: 'useDev'
+publishParser.addArgument ['-r', '--reset-settings'],
+  action: 'storeTrue'
+  help: 'Prompt for credentials instead of using .leavesrc.local'
+  dest: 'resetSettings'
 
 setupParser = actionSubparser.addParser 'setup',
   addHelp: true

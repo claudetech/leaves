@@ -4,6 +4,7 @@ herokuPublisher = require 'heroku-publisher'
 grunt           = require '../grunt'
 deps            = require '../deps'
 ghPublisher     = require '../gh-publisher'
+ftpPublisher    = require '../ftp-publisher'
 
 publishGithub = (opts) ->
   ghPublisher.publish process.cwd(), opts, (err, remoteUrl) ->
@@ -26,12 +27,11 @@ tryCompile = (options, callback) ->
 publishHeroku = (options) ->
   config = fs.readJSONSync path.join(process.cwd(), '.leavesrc')
   appName = config.herokuAppName || config.appName || process.cwd()
+  publicDir = 'dist'
   if options.useDev
-    build = 'leaves build'
-    publicDir = 'public'
+    build = 'leaves build --development'
   else
-    build = 'leaves build --production'
-    publicDir = 'dist'
+    build = 'leaves build'
   options = { retry: true, appName: appName, build: build, publicDir: publicDir }
   tryCompile options, ->
     herokuPublisher.publish options, (err, app) ->
@@ -40,9 +40,20 @@ publishHeroku = (options) ->
       fs.writeJSONSync path.join(process.cwd(), '.leavesrc'), config
       console.log "Your app has been published to #{app.web_url}"
 
+publishFtp = (options) ->
+  tryCompile options, ->
+    dir = path.join process.cwd(), 'dist'
+    ftpPublisher.publish dir, options, (err, info) ->
+      if err?
+        console.warn "An error has occured while uploading: #{err.message}"
+      else
+        console.log "Your site has been uploaded successfully to #{info.hostname}."
+
 exports.run = (options) ->
   console.log 'Starting to publish your website.'
   if options.provider == 'github'
     publishGithub options
+  else if options.provider == 'ftp'
+    publishFtp options
   else
     publishHeroku options
