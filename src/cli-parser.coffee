@@ -56,7 +56,7 @@ upgradeParser.addArgument ['-o', '--overwrite'],
 upgradeParser.addArgument ['-I', '--skip-install'],
   action: 'storeTrue'
   help: 'Skip NPM install after updating package.json. Do nothing if -o is not on.'
-
+  dest: 'skipInstall'
 
 parsers.build = buildParser = actionSubparser.addParser 'build',
   addHelp: true
@@ -154,18 +154,13 @@ _.each parsers, (parser) ->
   parser.addArgument  ['--save-options'],
     action: 'store'
     dest: 'saveOptions'
-    nargs: '?'
-    defaultValue: 'foo'
+    metavar: 'TYPE'
     help: 'Saves the current CLI options'
     choices: ['global', 'project', 'local']
 
-addDefaultArg = (args) ->
-  hasArg = false
-  args.forEach (arg) ->
-    unless arg == 'node' || path.basename(arg, '.js') == 'leaves' || arg[0] == '-'
-      return hasArg = true
-  args.push defaultAction unless hasArg
+fixArgs = (args) ->
+  args.unshift defaultAction unless args[0]? && args[0][0] != '-'
 
 exports.parse = (args=process.argv.slice(2)) ->
-  addDefaultArg args
+  fixArgs args
   parser.parseArgs args
