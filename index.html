@@ -212,8 +212,8 @@ you can use glob syntax.</p>
 
 <div class="highlight highlight-jade"><pre><span class="nt">html</span>
   <span class="nt">head</span>
-    <span class="nt">script</span>(<span class="na">glob=</span><span class="s">"js/**/*.js"</span>)
-    <span class="nt">link</span>(<span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">glob=</span><span class="s">"css/**/*.css"</span>)
+    <span class="nt">script</span>(<span class="na">src=</span><span class="s">"js/**/*.js"</span> <span class="na">glob</span>)
+    <span class="nt">link</span>(<span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/**/*.css"</span> <span class="na">glob</span>)
 </pre></div>
 
 <p>will become</p>
@@ -246,20 +246,22 @@ you can use glob syntax.</p>
 <code>css/application.min.css</code> will be concatenated and
 minified versions of the globbed files.</p>
 
+<h3>
+<a name="files-order" class="anchor" href="#files-order"><span class="octicon octicon-link"></span></a>Files order</h3>
+
 <p>If alphabetical order does not fit your need, you can
-use</p>
+use glob on single files, it will be inserted only once in the output.</p>
 
 <div class="highlight highlight-jade"><pre><span class="nt">html</span>
   <span class="nt">head</span>
-    <span class="nt">script</span>(<span class="na">src=</span><span class="s">"js/this-one-is-first.js"</span> <span class="na">group=</span><span class="s">"application"</span>)
-    <span class="nt">script</span>(<span class="na">glob=</span><span class="s">"js/**/*.js"</span>)
-    <span class="nt">link</span>(<span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">glob=</span><span class="s">"css/**/*.css"</span>)
+    <span class="nt">script</span>(<span class="na">src=</span><span class="s">"js/this-one-is-first.js"</span> <span class="na">glob</span>)
+    <span class="nt">script</span>(<span class="na">src=</span><span class="s">"js/**/*.js"</span> <span class="na">glob</span>)
+    <span class="nt">link</span>(<span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/**/*.css"</span> <span class="na">glob</span>)
 </pre></div>
 
-<p>The files will always be concatenated in order of appearance.
-The default group is called <code>application</code>, but you can use any. All files
-in the same group will be concatenated together and ignored from
-globbing if already included.</p>
+<p>The files will always be concatenated in order of appearance.</p>
+
+<p>Check out [the documentation][node-glob-html] for more details.</p>
       </section>
     </div>
 
