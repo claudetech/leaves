@@ -13,7 +13,5 @@ require('async').waterfall([
   function (cb) { config.handleArgs(argv, cb); }
 ], function (err, args) {
   if (err) return console.warn(err.message);
-  console.log(args);
-  console.log(config.settings);
   require(module).run(args);
 });

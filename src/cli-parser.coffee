@@ -33,13 +33,11 @@ newParser.addArgument ['projectName'],
 newParser.addArgument ['--css'],
   action: 'store'
   help: 'The CSS engine to use: Stylus (default) or less'
-  defaultValue: 'stylus'
   choices: ['stylus', 'less']
 
 newParser.addArgument ['--html'],
   action: 'store'
   help: 'The HTML template engine to use: Jade (default) or EJS'
-  defaultValue: 'jade'
   choices: ['jade', 'ejs']
 
 
@@ -65,7 +63,6 @@ parsers.build = buildParser = actionSubparser.addParser 'build',
 buildParser.addArgument ['-p', '--production'],
   action: 'storeTrue'
   help: 'Builds for production (concat+minifiy)'
-  defaultValue: true
 
 buildParser.addArgument ['-d', '--development'],
   action: 'storeFalse'
@@ -79,7 +76,6 @@ parsers.publish = publishParser = actionSubparser.addParser 'publish',
 publishParser.addArgument ['-p', '--provider'],
   action: 'store'
   help: 'Choose provider to publish. Default "heroku".'
-  defaultValue: 'heroku'
   choices: ['heroku', 'github', 'ftp']
 publishParser.addArgument ['-B', '--skip-build'],
   action: 'storeTrue'
@@ -118,7 +114,6 @@ parsers.install = installParser = actionSubparser.addParser 'install',
 installParser.addArgument ['-p', '--provider'],
   action: 'store'
   help: 'Choose provider to install dependencies. Default "bower".'
-  defaultValue: 'bower'
   choices: ['bower', 'npm']
 
 installParser.addArgument ['packages'],
@@ -126,13 +121,11 @@ installParser.addArgument ['packages'],
   help: 'Name of the packages to install'
   metavar: 'PACKAGES'
   nargs: '*'
-  defaultValue: []
 
 installParser.addArgument ['-S', '--no-save'],
   action: 'storeFalse'
   help: 'Avoid adding dependencies to bower.json or package.json'
   dest: 'save'
-  defaultValue: true
 
 parsers.get = getParser = actionSubparser.addParser 'get',
   addHelp: true
@@ -147,7 +140,6 @@ getParser.addArgument ['-p', '--protocol'],
   action: 'store'
   dest: 'protocol'
   help: 'Choose the protocol to clone directory.'
-  defaultValue: 'https'
   choices: ['https', 'ssh']
 
 _.each parsers, (parser) ->

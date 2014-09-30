@@ -7,10 +7,28 @@ exports.userHome = process.env.HOME ? process.env.USERPROFILE
 
 config = null
 
-notSavable =
-  'new': ['projectName']
-  install: ['packages']
-  get: ['repository']
+commands =
+  'new':
+    notSavable: ['projectName']
+    defaults:
+      css: 'stylus'
+      html: 'jade'
+  build:
+    defaults:
+      production: true
+  publish:
+    defaults:
+      provider: 'heroku'
+  install:
+    notSavable: ['packages']
+    defaults:
+      packages: []
+      provider: 'bower'
+      save: true
+  get:
+    notSavable: ['repository']
+    defaults:
+      protocol: 'https'
 
 exports.path =
   global: path.join exports.userHome, '.leaves/config'
@@ -27,7 +45,7 @@ loadConfig = (callback) ->
         else
           fs.exists filepath, (ok) -> cb_(null, ok)
     , (exists, cb_) ->
-        return cb_(null, conf) unless exists
+        return cb_(null, conf, null) unless exists
         fs.readJSON filepath, (err, c) ->
           _.extend(conf, c) if c?
           cb_ null, conf, err
@@ -48,12 +66,17 @@ exports.handleArgs = (argv, callback) ->
   if argv.saveOptions?
     configFile = exports.path[argv.saveOptions]
     functions.push (args, cb) ->
-      fs.readJSON configFile, ((err, conf) -> cb(null, conf, args))
+      fs.readJSON configFile, (err, conf) ->
+        if err && err.code == 'ENOENT'
+          cb({message: "Could not read file #{configFile}.\nIf you want to save to global config, try --save-options=global."}, conf, args)
+        else
+          cb(err, conf, args)
     ,
       (conf, args, cb) ->
         conf.commands ?= {}
         conf.commands[argv.action] = _.omit args, (v, k) ->
-          k in ['action', 'saveOptions'] || (notSavable[argv.action]? && k in notSavable[argv.action])
+          noSave = commands[argv.action]?.notSavable?
+          k in ['action', 'saveOptions'] || (noSave && k in noSave)
         fs.writeFile configFile, JSON.stringify(conf, null, 4), (err) ->
           cb err, args
   async.waterfall functions, (err, args) ->
