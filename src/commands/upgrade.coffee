@@ -15,7 +15,7 @@ shell        = require '../shell'
 moduleInfo = require path.join(path.dirname(path.dirname(__dirname)), 'package.json')
 moduleName = moduleInfo.name
 
-templateBasePath = 'node_modules/generator-static-website/app/templates/website'
+templateBasePath = 'node_modules/generator-static-website/app/templates'
 
 compileTemplate = (file, config) ->
   content = fs.readFileSync file, 'utf-8'
@@ -28,19 +28,37 @@ updatePackageDependencies = (src, dest, config) ->
   info.dependencies = srcInfo.dependencies
   fs.writeFileSync dest, JSON.stringify(info, null, 4)
 
+updateGitignore = (src, dest) ->
+  if fs.existsSync dest
+    content = fs.readFileSync(dest, 'utf-8').split('\n')
+  else
+    content = []
+  toAdd = []
+  _.each fs.readFileSync(src, 'utf-8').split('\n'), (f) ->
+    toAdd.push(f) unless content.indexOf(f) > -1
+  if toAdd.length > 0
+    toAdd.push('')
+    newContent = content.concat(toAdd)
+    fs.writeFileSync dest, newContent.join('\n')
+
+
+
 updateProjectFiles = (opts) ->
   projectConfigFile  = path.join(process.cwd(), '.leavesrc')
   projectGruntFile   = path.join(process.cwd(), 'Gruntfile.coffee')
   projectPackageFile = path.join(process.cwd(), 'package.json')
+  projectGitignore   = path.join(process.cwd(), '.gitignore')
   if fs.existsSync(projectGruntFile) && fs.existsSync(projectPackageFile) && fs.existsSync(projectConfigFile)
     console.log 'Upgrading files in project...'
     config = _.extend JSON.parse(fs.readFileSync(projectConfigFile, 'utf-8')).project, { _: _ }
 
-    globalGruntFile = pathResolver.fileGlobalPath moduleName, "#{templateBasePath}/Gruntfile.coffee"
-    globalPackageFile = pathResolver.fileGlobalPath moduleName, "#{templateBasePath}/package.json"
+    globalGruntFile = pathResolver.fileGlobalPath moduleName, "#{templateBasePath}/website/Gruntfile.coffee"
+    globalPackageFile = pathResolver.fileGlobalPath moduleName, "#{templateBasePath}/website/package.json"
+    globalGitignore = pathResolver.fileGlobalPath moduleName, "#{templateBasePath}/common/gitignore"
 
     fs.writeFileSync projectGruntFile, compileTemplate(globalGruntFile, config)
     updatePackageDependencies globalPackageFile, projectPackageFile, config
+    updateGitignore(globalGitignore, projectGitignore)
 
     unless opts.skip_install
       deps.npmInstall { verbose: true }, ->
