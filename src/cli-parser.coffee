@@ -1,9 +1,12 @@
-path = require 'path'
+path           = require 'path'
+_              = require 'underscore'
 ArgumentParser = require('argparse').ArgumentParser
 
 moduleInfo = require path.join(path.dirname(__dirname), 'package.json')
 
 defaultAction = 'watch'
+
+parsers = {}
 
 parser = new ArgumentParser(
   prog: 'leaves'
@@ -18,7 +21,7 @@ actionSubparser = parser.addSubparsers(
 )
 
 
-newParser = actionSubparser.addParser 'new',
+parsers.new = newParser = actionSubparser.addParser 'new',
   addHelp: true
   description: 'Create a new project'
 
@@ -40,12 +43,12 @@ newParser.addArgument ['--html'],
   choices: ['jade', 'ejs']
 
 
-watchParser = actionSubparser.addParser 'watch',
+parsers.watch = watchParser = actionSubparser.addParser 'watch',
   addHelp: true
   description: 'Watch for changes'
 
 
-upgradeParser = actionSubparser.addParser 'upgrade', { addHelp: true }
+parsers.upgrade = upgradeParser = actionSubparser.addParser 'upgrade', { addHelp: true }
 upgradeParser.addArgument ['-o', '--overwrite'],
   action: 'storeTrue'
   help: 'Overwrite Gruntfile.coffee and update package.json in your current project. USE WITH CARE.'
@@ -55,7 +58,7 @@ upgradeParser.addArgument ['-I', '--skip-install'],
   help: 'Skip NPM install after updating package.json. Do nothing if -o is not on.'
 
 
-buildParser = actionSubparser.addParser 'build',
+parsers.build = buildParser = actionSubparser.addParser 'build',
   addHelp: true
   description: 'Build the project'
 
@@ -69,7 +72,7 @@ buildParser.addArgument ['-d', '--development'],
   help: 'Builds for development (no concat/minify)'
   dest: 'production'
 
-publishParser = actionSubparser.addParser 'publish',
+parsers.publish = publishParser = actionSubparser.addParser 'publish',
   addHelp: true
   description: 'Publish the project'
 
@@ -99,7 +102,7 @@ publishParser.addArgument ['-r', '--reset-settings'],
   help: 'Prompt for credentials instead of using .leavesrc.local'
   dest: 'resetSettings'
 
-setupParser = actionSubparser.addParser 'setup',
+parsers.setup = setupParser = actionSubparser.addParser 'setup',
   addHelp: true
   description: 'Setup leaves'
 
@@ -108,7 +111,7 @@ setupParser.addArgument ['-I', '--skip-install'],
   help: 'Skip bower and grunt-cli install.'
   dest: 'skipInstall'
 
-installParser = actionSubparser.addParser 'install',
+parsers.install = installParser = actionSubparser.addParser 'install',
   addHelp: true
   description: 'Install dependencies'
 
@@ -131,7 +134,7 @@ installParser.addArgument ['-S', '--no-save'],
   dest: 'save'
   defaultValue: true
 
-getParser = actionSubparser.addParser 'get',
+parsers.get = getParser = actionSubparser.addParser 'get',
   addHelp: true
   description: 'Fetch and prepare leaves project.'
 
@@ -146,6 +149,15 @@ getParser.addArgument ['-p', '--protocol'],
   help: 'Choose the protocol to clone directory.'
   defaultValue: 'https'
   choices: ['https', 'ssh']
+
+_.each parsers, (parser) ->
+  parser.addArgument  ['--save-options'],
+    action: 'store'
+    dest: 'saveOptions'
+    nargs: '?'
+    defaultValue: 'foo'
+    help: 'Saves the current CLI options'
+    choices: ['global', 'project', 'local']
 
 addDefaultArg = (args) ->
   hasArg = false
