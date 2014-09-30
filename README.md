@@ -16,7 +16,7 @@ for more information of what you can do in the created project.
 
 * HTML templating via [Jade](http://jade-lang.com/) (default) or [EJS](https://github.com/RandomEtc/ejs-locals)
 * CSS templating via [Stylus](http://learnboost.github.io/stylus/) (default) or [less](http://lesscss.org/)
-* CoffeeScript compilation
+* [CoffeeScript](http://coffeescript.org/) compilation
 * Project watch and livereload
 * Scripts and stylesheets globbing with `**/*.js` like syntax
 * Compile error displayed in browser
