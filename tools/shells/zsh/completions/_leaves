@@ -35,7 +35,7 @@ case $words[1] in
   build)
     _arguments \
       '(-h --help)'{-h,--help}'[show help]' \
-      '(-p --production)'{-p,--production}'[Builds for production (concat+minifiy)]'
+      '(-p --production)'{-p,--production}'[Builds for production (concat+minifiy)]' \
       '(-d --development)'{-d,--development}'[Builds for development (no concat+minifiy)]'
     ;;
   watch)
