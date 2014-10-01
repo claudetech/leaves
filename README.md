@@ -18,7 +18,7 @@ no other external dependencies. It is built using
 * Scripts and stylesheets globbing with `**/*.js` like syntax
 * Compile error displayed in browser
 * Single command deploy to Heroku and GitHub pages
-* Misc: lorem-ipsum generator, `leaves` shell completion, project single command upgrade
+* Misc: lorem-ipsum generator, easy CDN usage, `leaves` shell completion, project single command upgrade
 
 ## Installation
 
@@ -229,10 +229,29 @@ The files will always be concatenated in order of appearance.
 
 Check out [the documentation][node-glob-html] for more details.
 
+### CDN for production
+
+For library such as jQuery, it is common to use a CDN
+in production, but it can be better for development to
+used a local and non minified version of the library.
+You can achieve this easily with the following syntax.
+
+```jade
+html
+  head
+    script(src="compnents/jquery/dist/jquery.js" cdn="//code.jquery.com/jquery-2.1.1.min.js")
+    link(rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.css" cdn="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css")
+```
+
+Note that `cdn` attribute is not compatible with `glob` and will
+result in a compile error.
+
+Check out [the documentation][node-cdnify] for more details.
+
 [generator-static-website]: https://github.com/claudetech/generator-static-website
 [github-pages]: https://pages.github.com/
 [heroku]: https://www.heroku.com/
 [bower]: http://bower.io/
 [npm]: https://www.npmjs.org/
 [node-lorem-ipsum]: https://github.com/knicklabs/lorem-ipsum.js
-[node-glob-html]: https://github.com/claudetech/node-glob-html
+[node-cdnify]: https://github.com/claudetech/node-cdnify
