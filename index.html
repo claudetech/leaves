@@ -53,7 +53,7 @@ for more information of what you can do in the created project.</p>
 <li>Scripts and stylesheets globbing with <code>**/*.js</code> like syntax</li>
 <li>Compile error displayed in browser</li>
 <li>Single command deploy to GitHub pages</li>
-<li>Misc: lorem-ipsum generator, <code>leaves</code> shell completion, project single command upgrade</li>
+<li>Misc: lorem-ipsum generator, easy CDN usage, <code>leaves</code> shell completion, project single command upgrade</li>
 </ul><h1>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h1>
 
@@ -262,6 +262,25 @@ use glob on single files, it will be inserted only once in the output.</p>
 <p>The files will always be concatenated in order of appearance.</p>
 
 <p>Check out [the documentation][node-glob-html] for more details.</p>
+
+<h3>
+<a name="cdn-for-production" class="anchor" href="#cdn-for-production"><span class="octicon octicon-link"></span></a>CDN for production</h3>
+
+<p>For library such as jQuery, it is common to use a CDN
+in production, but it can be better for development to
+used a local and non minified version of the library.
+You can achieve this easily with the following syntax.</p>
+
+<div class="highlight highlight-jade"><pre><span class="nt">html</span>
+  <span class="nt">head</span>
+    <span class="nt">script</span>(<span class="na">src=</span><span class="s">"compnents/jquery/dist/jquery.js"</span> <span class="na">cdn=</span><span class="s">"//code.jquery.com/jquery-2.1.1.min.js"</span>)
+    <span class="nt">link</span>(<span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"components/bootstrap/dist/css/bootstrap.css"</span> <span class="na">cdn=</span><span class="s">"//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"</span>)
+</pre></div>
+
+<p>Note that <code>cdn</code> attribute is not compatible with <code>glob</code> and will
+result in a compile error.</p>
+
+<p>Check out <a href="https://github.com/claudetech/node-cdnify">the documentation</a> for more details.</p>
       </section>
     </div>
 
