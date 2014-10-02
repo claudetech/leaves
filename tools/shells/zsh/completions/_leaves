@@ -49,7 +49,8 @@ case $words[1] in
       '(-C --skip-commit)'{-C,--skip-commit}'[Skip adding/commiting changes before publishing.]' \
       '(-I --skip-install)'{-I,--skip-install}'[Skip npm install before building.]' \
       '(-d --use-dev)'{-u,--use-dev}'[Use development build instead of production build.]' \
-      '(-p --provider)'{-p,--provider}='[Select the provider to pubilsh(heroku|github|ftp)]:Provider:(heroku github ftp)'
+      '(-p --provider)'{-p,--provider}='[Select the provider to publish(heroku|github|ftp)]:Provider:(heroku github ftp)' \
+      '(-N --no-confirmation)'{-N,--no-confirmation}='[Disable confirmation prompt]'
     ;;
   upgrade)
     _arguments \
