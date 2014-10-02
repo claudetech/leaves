@@ -1,6 +1,6 @@
 {
   "name": "leaves",
-  "version": "0.21.2",
+  "version": "0.21.3",
   "description": "Productivity tool for frontend engineers",
   "main": "index.js",
   "bin": {
@@ -44,7 +44,7 @@
     "generator-static-website": "^0.13.3",
     "git-cli": "^0.5.0",
     "grunt": "^0.4.5",
-    "heroku-publisher": "^0.1.13",
+    "heroku-publisher": "^0.1.14",
     "npm-web-api": "^0.1.1",
     "prompt": "git+https://github.com/claudetech/prompt.git",
     "semver": "^3.0.1",
