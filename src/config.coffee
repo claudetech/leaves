@@ -7,27 +7,25 @@ exports.userHome = process.env.HOME ? process.env.USERPROFILE
 
 config = null
 
-commands =
-  'new':
-    notSavable: ['projectName']
-    defaults:
+notSavable =
+  new: ['projectName']
+  install: ['packages']
+  get: ['repository']
+
+exports.defaults =
+  commands:
+    new:
       css: 'stylus'
       html: 'jade'
-  build:
-    defaults:
+    build:
       production: true
-  publish:
-    defaults:
+    publish:
       provider: 'heroku'
-  install:
-    notSavable: ['packages']
-    defaults:
+    install:
       packages: []
       provider: 'bower'
       save: true
-  get:
-    notSavable: ['repository']
-    defaults:
+    get:
       protocol: 'https'
 
 exports.path =
@@ -61,7 +59,8 @@ loadConfig = (callback) ->
 exports.handleArgs = (argv, callback) ->
   functions = [
     (cb) ->
-      cb null, _.extend({}, config.commands?[argv.action], argv)
+      argv = _.omit argv, (v) -> v == null || _.isFunction(v)
+      cb null, _.defaults argv, config.commands?[argv.action]
   ]
   if argv.saveOptions?
     configFile = exports.path[argv.saveOptions]
@@ -75,8 +74,8 @@ exports.handleArgs = (argv, callback) ->
       (conf, args, cb) ->
         conf.commands ?= {}
         conf.commands[argv.action] = _.omit args, (v, k) ->
-          noSave = commands[argv.action]?.notSavable?
-          k in ['action', 'saveOptions'] || (noSave && k in noSave)
+          noSave = notSavable[argv.action]? && k in notSavable[argv.action]
+          k in ['action', 'saveOptions'] || noSave
         fs.writeFile configFile, JSON.stringify(conf, null, 4), (err) ->
           cb err, args
   async.waterfall functions, (err, args) ->
@@ -84,7 +83,7 @@ exports.handleArgs = (argv, callback) ->
 
 exports.load = (callback) ->
   loadConfig (err, conf) ->
-    config = conf
+    config = _.defaults conf, exports.defaults
     callback err
 
 Object.defineProperty exports, 'settings',

@@ -151,7 +151,11 @@ _.each parsers, (parser) ->
     choices: ['global', 'project', 'local']
 
 fixArgs = (args) ->
+  return if '-v' in args || '-h' in args
   args.unshift defaultAction unless args[0]? && args[0][0] != '-'
+  saveOptionsIndex = args.indexOf '--save-options'
+  if saveOptionsIndex > -1 && args[saveOptionsIndex + 1]? != '-'
+    args.splice saveOptionsIndex + 1, 0, 'project'
 
 exports.parse = (args=process.argv.slice(2)) ->
   fixArgs args
