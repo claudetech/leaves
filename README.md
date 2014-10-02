@@ -30,7 +30,60 @@ $ npm install -g leaves
 
 If `npm install` fails, try to use `sudo`.
 
-## Commands
+## Getting started
+
+### Start a new project
+
+```sh
+$ leaves new project_name
+$ cd project_name
+$ leaves
+```
+
+and start coding!
+
+### Get a project from Git
+
+```sh
+$ leaves get https://github.com/me/my_leaves_project.git
+$ cd my_leaves_project
+$ leaves
+```
+
+and start coding!
+
+## Project structure
+
+The app has the following structure:
+
+```
+.
+├── assets
+│   ├── css
+│   │   └── main.styl
+│   ├── favicon.ico
+│   ├── img
+│   └── js
+│       └── app.coffee
+├── bower.json
+├── package.json
+└── views
+    ├── index.jade
+    └── layout.jade
+```
+
+when running leaves, `views` and `assets` are watched, compiled on change
+and your browser is reloaded.
+
+## Usage
+
+For every command, you can pass the `--save-options` flag
+to remember the options you just passed for future usage.
+`--save-options` defaults to `--save-options=project`, which writes
+the `.leavesrc` in your project, you can use `--save-options=global`
+if you want this to be global to all your project.
+
+The available commands are listed below.
 
 ### Setup
 
