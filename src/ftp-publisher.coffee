@@ -125,5 +125,8 @@ makeDirUpload = (info, dir, remoteDir, onExisting, callback) ->
 exports.publish = (dir, opts, callback) ->
   exports.getInfo opts, (err, ftpData) ->
     return err if err
+    noOpConfirm = (d, cb) -> cb(null)
+    console.log opts.confirmation
+    confirmCallback = if opts.confirmation then askConfirmation else noOpConfirm
     makeDirUpload ftpData, dir, ftpData.cwd, askConfirmation, (err) ->
       callback err, ftpData

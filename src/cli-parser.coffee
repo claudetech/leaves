@@ -93,6 +93,10 @@ publishParser.addArgument ['-d', '--use-dev'],
   action: 'storeTrue'
   help: 'Use development build instead of production build.'
   dest: 'useDev'
+publishParser.addArgument ['-N', '--no-confirmation'],
+  action: 'storeFalse'
+  help: 'Avoid confirmation when publishing.'
+  dest: 'confirmation'
 publishParser.addArgument ['-r', '--reset-settings'],
   action: 'storeTrue'
   help: 'Prompt for credentials instead of using .leavesrc.local'
