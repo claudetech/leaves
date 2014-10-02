@@ -112,7 +112,7 @@ askConfirmation = (directory, callback) ->
     if /^(y(es)?|no?)$/i.exec(result.ok) == null
       console.log "Invalid input."
       return askConfirmation directory, callback
-    err = if result.ok[0] == 'y' then null else 'Aborted.'
+    err = if result.ok[0] == 'y' then null else { message: 'Aborted.' }
     callback err
 
 makeDirUpload = (info, dir, remoteDir, onExisting, callback) ->
@@ -126,7 +126,6 @@ exports.publish = (dir, opts, callback) ->
   exports.getInfo opts, (err, ftpData) ->
     return err if err
     noOpConfirm = (d, cb) -> cb(null)
-    console.log opts.confirmation
     confirmCallback = if opts.confirmation then askConfirmation else noOpConfirm
-    makeDirUpload ftpData, dir, ftpData.cwd, askConfirmation, (err) ->
+    makeDirUpload ftpData, dir, ftpData.cwd, confirmCallback, (err) ->
       callback err, ftpData

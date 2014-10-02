@@ -48,11 +48,13 @@ parsers.watch = watchParser = actionSubparser.addParser 'watch',
 
 parsers.upgrade = upgradeParser = actionSubparser.addParser 'upgrade', { addHelp: true }
 upgradeParser.addArgument ['-o', '--overwrite'],
-  action: 'storeTrue'
+  action: 'storeConst'
+  constant: true
   help: 'Overwrite Gruntfile.coffee and update package.json in your current project. USE WITH CARE.'
 
 upgradeParser.addArgument ['-I', '--skip-install'],
-  action: 'storeTrue'
+  action: 'storeConst'
+  constant: true
   help: 'Skip NPM install after updating package.json. Do nothing if -o is not on.'
   dest: 'skipInstall'
 
@@ -61,11 +63,13 @@ parsers.build = buildParser = actionSubparser.addParser 'build',
   description: 'Build the project'
 
 buildParser.addArgument ['-p', '--production'],
-  action: 'storeTrue'
+  action: 'storeConst'
+  constant: true
   help: 'Builds for production (concat+minifiy)'
 
 buildParser.addArgument ['-d', '--development'],
-  action: 'storeFalse'
+  action: 'storeConst'
+  constant: false
   help: 'Builds for development (no concat/minify)'
   dest: 'production'
 
@@ -78,23 +82,28 @@ publishParser.addArgument ['-p', '--provider'],
   help: 'Choose provider to publish. Default "heroku".'
   choices: ['heroku', 'github', 'ftp']
 publishParser.addArgument ['-B', '--skip-build'],
-  action: 'storeTrue'
+  action: 'storeConst'
+  constant: true
   help: 'Skip file compile before publishing.'
   dest: 'skipBuild'
 publishParser.addArgument ['-C', '--skip-commit'],
-  action: 'storeTrue'
+  action: 'storeConst'
+  constant: true
   help: 'Skip adding/commiting changes before publishing.'
   dest: 'skipCommit'
 publishParser.addArgument ['-I', '--skip-install'],
-  action: 'storeTrue'
+  action: 'storeConst'
+  constant: true
   help: 'Skip npm install before building. Always true when --skip-build is active.'
   dest: 'skipInstall'
 publishParser.addArgument ['-d', '--use-dev'],
-  action: 'storeTrue'
+  action: 'storeConst'
+  constant: true
   help: 'Use development build instead of production build.'
   dest: 'useDev'
 publishParser.addArgument ['-N', '--no-confirmation'],
-  action: 'storeFalse'
+  action: 'storeConst'
+  constant: false
   help: 'Avoid confirmation when publishing.'
   dest: 'confirmation'
 publishParser.addArgument ['-r', '--reset-settings'],
@@ -107,7 +116,8 @@ parsers.setup = setupParser = actionSubparser.addParser 'setup',
   description: 'Setup leaves'
 
 setupParser.addArgument ['-I', '--skip-install'],
-  action: 'storeTrue'
+  action: 'storeConst'
+  constant: true
   help: 'Skip bower and grunt-cli install.'
   dest: 'skipInstall'
 
@@ -127,7 +137,8 @@ installParser.addArgument ['packages'],
   nargs: '*'
 
 installParser.addArgument ['-S', '--no-save'],
-  action: 'storeFalse'
+  action: 'storeConst'
+  constant: false
   help: 'Avoid adding dependencies to bower.json or package.json'
   dest: 'save'
 
