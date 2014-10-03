@@ -1,5 +1,5 @@
 path           = require 'path'
-_              = require 'underscore'
+_              = require 'lodash'
 ArgumentParser = require('argparse').ArgumentParser
 
 moduleInfo = require path.join(path.dirname(__dirname), 'package.json')
@@ -8,18 +8,15 @@ defaultAction = 'watch'
 
 parsers = {}
 
-parser = new ArgumentParser(
+parser = new ArgumentParser
   prog: 'leaves'
   version: moduleInfo.version
   addHelp: true
   description: 'Static website generator for designers.'
-)
 
-actionSubparser = parser.addSubparsers(
+actionSubparser = parser.addSubparsers
   title: 'Subcommands'
   dest: 'action'
-)
-
 
 parsers.new = newParser = actionSubparser.addParser 'new',
   addHelp: true
@@ -156,6 +153,64 @@ getParser.addArgument ['-p', '--protocol'],
   dest: 'protocol'
   help: 'Choose the protocol to clone directory.'
   choices: ['https', 'ssh']
+
+configParser = actionSubparser.addParser 'config',
+  addHelp: true
+  description: 'Displays and update leaves configuration.'
+
+configParser.addArgument ['-g', '--global'],
+  action: 'storeConst'
+  constant: 'global'
+  dest: 'type'
+  help: 'Uses global configuration.'
+
+configParser.addArgument ['-p', '--project'],
+  action: 'storeConst'
+  constant: 'project'
+  dest: 'type'
+  help: 'Uses project configuration.'
+
+configParser.addArgument ['-l', '--local'],
+  action: 'storeConst'
+  constant: 'local'
+  dest: 'type'
+  help: 'Uses local configuration.'
+
+configSubparser = configParser.addSubparsers
+  title: 'Config commands'
+  dest: 'subaction'
+
+configGetParser = configSubparser.addParser 'get',
+  addHelp: true
+  description: 'Get the given configuration'
+
+configGetParser.addArgument ['key'],
+  action: 'store'
+  help: 'Name of the key to get'
+  metavar: 'KEY'
+
+configSetParser = configSubparser.addParser 'set',
+  addHelp: true
+  description: 'Get the given configuration'
+
+configSetParser.addArgument ['key'],
+  action: 'store'
+  help: 'Name of the key to set'
+  metavar: 'VALUE'
+
+configSetParser.addArgument ['value'],
+  action: 'store'
+  help: 'Value for the key to set'
+  metavar: 'KEY'
+
+configUnsetParser = configSubparser.addParser 'unset',
+  addHelp: true
+  description: 'Get the given configuration'
+
+configUnsetParser.addArgument ['key'],
+  action: 'store'
+  help: 'Name of the key to unset'
+  metavar: 'KEY'
 
 _.each parsers, (parser) ->
   parser.addArgument  ['--save-options'],

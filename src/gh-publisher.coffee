@@ -1,4 +1,4 @@
-_          = require 'underscore'
+_          = require 'lodash'
 Repository = require('git-cli').Repository
 path       = require 'path'
 fs         = require 'fs-extra'

@@ -1,5 +1,5 @@
-_              = require 'underscore'
-npm            = require 'npm'
+_   = require 'lodash'
+npm = require 'npm'
 
 try
   bower = require 'bower'

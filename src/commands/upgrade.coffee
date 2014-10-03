@@ -5,7 +5,7 @@ npmapi = require 'npm-web-api'
 semver = require 'semver'
 fs     = require 'fs-extra'
 npm    = require 'npm'
-_      = require 'underscore'
+_      = require 'lodash'
 _.mixin require('underscore.string').exports()
 
 pathResolver = require '../path-resolver'

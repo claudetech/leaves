@@ -1,8 +1,6 @@
 Repository = require('git-cli').Repository
 path       = require 'path'
 npm        = require 'npm'
-_          = require 'underscore'
-_.mixin require('underscore.string').exports()
 
 grunt      = require '../grunt'
 deps       = require '../deps'

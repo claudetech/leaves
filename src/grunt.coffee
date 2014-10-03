@@ -1,5 +1,5 @@
 grunt = require 'grunt'
-_     = require 'underscore'
+_     = require 'lodash'
 path  = require 'path'
 fs    = require 'fs'
 

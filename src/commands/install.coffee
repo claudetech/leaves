@@ -1,4 +1,4 @@
-_     = require 'underscore'
+_     = require 'lodash'
 
 grunt = require '../grunt'
 deps  = require '../deps'

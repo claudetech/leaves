@@ -45,10 +45,10 @@
     "git-cli": "^0.5.0",
     "grunt": "^0.4.5",
     "heroku-publisher": "^0.1.14",
+    "lodash": "^2.4.1",
     "npm-web-api": "^0.1.1",
     "prompt": "git+https://github.com/claudetech/prompt.git",
     "semver": "^3.0.1",
-    "underscore": "^1.6.0",
     "underscore.string": "^2.3.3",
     "yeoman-generator": "^0.17.1"
   }

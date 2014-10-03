@@ -3,7 +3,7 @@
 var path           = require('path');
 var cliParser      = require('../lib/cli-parser');
 var config         = require('../lib/config');
-var _              = require('underscore');
+var _              = require('lodash');
 var argv           = cliParser.parse();
 var module         = path.join('../lib/commands', argv.action);
 

@@ -1,5 +1,5 @@
 Client = require 'ftp'
-_      = require 'underscore'
+_      = require 'lodash'
 prompt = require 'prompt'
 path   = require 'path'
 fs     = require 'fs-extra'

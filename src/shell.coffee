@@ -1,7 +1,7 @@
 npm  = require 'npm'
 path = require 'path'
 fs   = require 'fs-extra'
-_    = require 'underscore'
+_    = require 'lodash'
 
 exports.copyZshSetup = ->
   return if _.isEmpty(process.env.HOME)
