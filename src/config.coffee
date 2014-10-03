@@ -71,7 +71,7 @@ loadConfig = (callback) ->
     ], cb
   , (err, conf) ->
     configs = conf
-    _.merge config, configs.global, configs.project, configs.local
+    _.merge config, exports.defaults, configs.global, configs.project, configs.local
     callback err, config
 
 configErr = (type, options={}) ->
@@ -105,7 +105,7 @@ saveCliOptions = (argv, cb) ->
   toUpdate = {commands: {}}
   toUpdate.commands[argv.action] = _.omit argv, (v, k) ->
     noSave = notSavable[argv.action]? && k in notSavable[argv.action]
-    noSave || k in notSavable.global || _.isFunction(v)
+    noSave || k in notSavable.global || _.isFunction(v) || !v?
   exports.updateConfig argv.saveOptions, toUpdate, {notFoundMsg: msg, save: true}, (err) ->
     cb err
 
