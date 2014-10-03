@@ -1,8 +1,9 @@
-fs         = require 'fs-extra'
-grunt      = require '../grunt'
-deps       = require '../deps'
+grunt = require '../grunt'
+deps  = require '../deps'
+util  = require '../util'
 
 exports.run = (opts) ->
-  deps.npmInstall ->
-    task = if opts.production then 'compile:dist'  else 'compile:dev'
-    grunt.tasks task
+  util.runIfInProject ->
+    deps.npmInstall ->
+      task = if opts.production then 'compile:dist'  else 'compile:dev'
+      grunt.tasks task

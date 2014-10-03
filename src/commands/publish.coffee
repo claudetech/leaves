@@ -5,6 +5,7 @@ grunt           = require '../grunt'
 deps            = require '../deps'
 ghPublisher     = require '../gh-publisher'
 ftpPublisher    = require '../ftp-publisher'
+util            = require '../util'
 
 publishGithub = (opts) ->
   ghPublisher.publish process.cwd(), opts, (err, remoteUrl) ->
@@ -50,10 +51,11 @@ publishFtp = (options) ->
         console.log "Your site has been uploaded successfully to #{info.hostname}."
 
 exports.run = (options) ->
-  console.log 'Starting to publish your website.'
-  if options.provider == 'github'
-    publishGithub options
-  else if options.provider == 'ftp'
-    publishFtp options
-  else
-    publishHeroku options
+  util.runIfInProject ->
+    console.log 'Starting to publish your website.'
+    if options.provider == 'github'
+      publishGithub options
+    else if options.provider == 'ftp'
+      publishFtp options
+    else
+      publishHeroku options

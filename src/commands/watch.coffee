@@ -1,4 +1,6 @@
 grunt = require '../grunt'
+util  = require '../util'
 
 exports.run = (opts) ->
-  grunt.tasks [], { force: true }
+  util.runIfInProject ->
+    grunt.tasks [], { force: true }
