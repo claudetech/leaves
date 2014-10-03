@@ -11,6 +11,7 @@ _1st_arguments=(
   'publish:Publish the project to GitHub Pages'
   'install:Install dependencies in the project'
   'get:Fetch and prepare leaves project'
+  'config:Configures leaves'
 )
 
 local expl
@@ -68,5 +69,12 @@ case $words[1] in
     _arguments \
       '(-h --help)'{-h,--help}'[show help]' \
       '(-p --protocol)'{-p,--protocol}='[Select the protocol to clone the repository (https|ssh)]:Protocol:(https ssh)' \
+    ;;
+  config)
+    _arguments \
+      '(-h --help)'{-h,--help}'[show help]' \
+      '(-g --global)'{-g,--global}'[Use the global configuration]' \
+      '(-p --project)'{-p,--project}'[Use the project configuration]' \
+      '(-l --local)'{-l,--local}'[Use the local configuration]'
     ;;
 esac
