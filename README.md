@@ -1,6 +1,6 @@
 # leaves - Productivity tool for frontend engineers
 
-[Full documentation](http://claudetech.github.io/leaves)
+[Full documentation](http://oss.claudetech.com/leaves)
 
 There are a lot of tools around to create
 static websites and single page applications.
@@ -308,3 +308,4 @@ Check out [the documentation][node-cdnify] for more details.
 [npm]: https://www.npmjs.org/
 [node-lorem-ipsum]: https://github.com/knicklabs/lorem-ipsum.js
 [node-cdnify]: https://github.com/claudetech/node-cdnify
+[node-glob-html]: https://github.com/claudetech/node-glob-html

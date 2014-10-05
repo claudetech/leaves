@@ -1,5 +1,8 @@
 # Leaves - デザイナーの開発ツール
 
+[ドキュメンテーション](http://oss.claudetech.com/leaves/ja)
+
+
 Leavesは静的なサイトやシングルページアプリケーションを作るための開発ツールです。
 NodeJS上で動いており、他との依存関係はありません。
 [yeoman](http://yeoman.io/)と[Grunt](http://gruntjs.com/)を使って作られています。
