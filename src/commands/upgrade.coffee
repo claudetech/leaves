@@ -18,6 +18,7 @@ moduleName = moduleInfo.name
 templateBasePath = 'node_modules/generator-static-website/app/templates'
 
 compileTemplate = (file, config) ->
+  config = _.merge {}, config, {options: {'is-leaves': true}}
   content = fs.readFileSync file, 'utf-8'
   _.template(content)(config)
 
