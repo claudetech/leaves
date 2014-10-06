@@ -124,13 +124,18 @@ exports.load = (callback) ->
     config = _.defaults conf, exports.defaults
     callback err
 
-recurseConf = (keys, conf, cb) ->
+recurseConf = (keys, conf, create, cb) ->
+  [create, cb] = [false, create] if _.isFunction(create)
   [key, rest...] = keys
   val = conf[key]
   if _.isEmpty(rest) || _.isUndefined(val)
-    cb(key, conf)
+    if create && !_.isEmpty(rest)
+      conf[key] = {}
+      recurseConf(rest, conf[key], create, cb)
+    else
+      cb(key, conf)
   else
-    recurseConf(rest, val, cb)
+    recurseConf(rest, val, create, cb)
 
 exports.get = (key, type) ->
   keys = key.split('.')
@@ -141,7 +146,7 @@ exports.set = (key, val, type='project') ->
   keys = key.split('.')
   conf = configs[type]
   return unless conf?
-  recurseConf keys, conf, (k, c) -> c[k] = val
+  recurseConf keys, conf, true, (k, c) -> c[k] = val
 
 exports.unset = (key, type='project') ->
   keys = key.split('.')
