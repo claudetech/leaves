@@ -43,9 +43,20 @@ updateGitignore = (src, dest) ->
     newContent = content.concat(toAdd)
     fs.writeFileSync dest, newContent.join('\n')
 
+showFinalMessage = (oldVersion, newVersion) ->
+  upgradeInfo =
+  msg = "Your project has been upgraded"
+  msg += " from #{oldVersion} to #{newVersion}" if oldVersion?
+  msg += ". You're all done!"
+  console.log msg
 
-updateProjectFiles = (opts) ->
-  projectConfigFile  = path.join(process.cwd(), '.leavesrc')
+updateProjectFiles = (opts, newVersion) ->
+  console.log "Upgrading project..."
+  projectConfigFile = path.join(process.cwd(), '.leavesrc')
+  projectConfig = JSON.parse(fs.readFileSync(projectConfigFile))
+  if projectConfig.leaves? && semver.lte(newVersion, projectConfig.leaves)
+    console.log "Your project is already up to date!"
+    return
   projectGruntFile   = path.join(process.cwd(), 'Gruntfile.coffee')
   projectGruntFile   = path.join(process.cwd(), '.gruntfile.coffee') unless fs.existsSync(projectGruntFile)
   projectPackageFile = path.join(process.cwd(), 'package.json')
@@ -63,9 +74,15 @@ updateProjectFiles = (opts) ->
     updatePackageDependencies globalPackageFile, projectPackageFile, config
     updateGitignore(globalGitignore, projectGitignore)
 
-    unless opts.skip_install
+    oldVersion = projectConfig.leaves
+    projectConfig.leaves = newVersion
+    fs.writeFileSync projectConfigFile, JSON.stringify(projectConfig, null, 4)
+
+    if opts.skip_install
+      showFinalMessage oldVersion, newVersion
+    else
       deps.npmInstall { verbose: true }, ->
-        console.log "Your project has been updated. You're all done!"
+        showFinalMessage oldVersion, newVersion
   else
     console.warn "You do not seem to be in a Leaves project, ignoring files upgrade."
 
@@ -91,9 +108,10 @@ runUpdate = (retry, opts) ->
       console.error "The udpate failed with code #{code} (#{error.code}): #{error.description}."
       console.error "Please try to upgrade manually."
     else
-      console.log "Great, Leaves has been upgraded! #{moduleInfo.version} -> #{getNewVersion()}"
+      newVersion = getNewVersion()
+      console.log "Great, Leaves has been upgraded! #{moduleInfo.version} -> #{newVersion}"
       if opts.overwrite
-        updateProjectFiles opts
+        updateProjectFiles opts, newVersion
 
 exports.run = (opts) ->
   console.log "Upgrading Leaves..."
@@ -101,6 +119,6 @@ exports.run = (opts) ->
     if semver.lt(moduleInfo.version, pkg.version)
       runUpdate true, opts
     else
-      console.log "Great, Leaves is already up to date."
+      console.log "Great, Leaves is already up to date!"
       if opts.overwrite
-        updateProjectFiles opts
+        updateProjectFiles opts, moduleInfo.version

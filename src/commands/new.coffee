@@ -2,6 +2,8 @@ generator = require('yeoman-generator')()
 path = require 'path'
 fs   = require 'fs'
 
+moduleInfo = require '../../package.json'
+
 exports.run = (opts) ->
   oldCwd = process.cwd()
   process.chdir path.dirname(__dirname)
@@ -14,6 +16,7 @@ exports.run = (opts) ->
   generator.run args, opts, ->
     settings =
       project:
+        leaves: moduleInfo.version
         appname: opts.projectName
         options:
           css: opts.css
