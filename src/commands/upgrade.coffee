@@ -51,7 +51,6 @@ showFinalMessage = (oldVersion, newVersion) ->
   console.log msg
 
 updateProjectFiles = (opts, newVersion) ->
-  console.log "Upgrading project..."
   projectConfigFile = path.join(process.cwd(), '.leavesrc')
   projectConfig = JSON.parse(fs.readFileSync(projectConfigFile))
   if projectConfig.leaves? && semver.lte(newVersion, projectConfig.leaves)
