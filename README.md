@@ -16,7 +16,7 @@ features commonly needed for frontend development.
 * Compile error displayed in browser
 * Internationalization
 * Single command deploy to Heroku, GitHub pages and FTP servers
-* Misc: lorem-ipsum generator, easy CDN usage, `leaves` shell completion, project single command upgrade
+* Misc: lorem-ipsum generator, easy CDN usage, `leaves` shell completion, project single command upgrade, dev mode
 
 ## Getting started
 
