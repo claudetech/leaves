@@ -67,7 +67,11 @@ updateProjectFiles = (opts) ->
       deps.npmInstall { verbose: true }, ->
         console.log "Your project has been updated. You're all done!"
   else
-    console.warn "You do not seem to be in a #{moduleName} project, ignoring files upgrade."
+    console.warn "You do not seem to be in a Leaves project, ignoring files upgrade."
+
+getNewVersion = ->
+  info = fs.readFileSync(pathResolver.fileGlobalPath(moduleName, "package.json"), 'utf8')
+  JSON.parse(info).version
 
 runUpdate = (retry, opts) ->
   shell.copyZshSetup()
@@ -87,16 +91,16 @@ runUpdate = (retry, opts) ->
       console.error "The udpate failed with code #{code} (#{error.code}): #{error.description}."
       console.error "Please try to upgrade manually."
     else
-      console.log "Great, #{moduleName} has been upgraded!"
+      console.log "Great, Leaves has been upgraded! #{moduleInfo.version} -> #{getNewVersion()}"
       if opts.overwrite
         updateProjectFiles opts
 
 exports.run = (opts) ->
-  console.log "Upgrading #{moduleName}..."
+  console.log "Upgrading Leaves..."
   npmapi.getLatest moduleName, (err, pkg) ->
     if semver.lt(moduleInfo.version, pkg.version)
       runUpdate true, opts
     else
-      console.log "Great, #{moduleName} is already up to date."
+      console.log "Great, Leaves is already up to date."
       if opts.overwrite
         updateProjectFiles opts
