@@ -6,13 +6,20 @@ deps            = require '../deps'
 ghPublisher     = require '../gh-publisher'
 ftpPublisher    = require '../ftp-publisher'
 util            = require '../util'
+config          = require '../config'
+slack           = require '../slack'
 
-publishGithub = (opts) ->
+appname = ->
+  config.get('project.appname') ? "Your website"
+
+publishGithub = (opts, cb) ->
   ghPublisher.publish process.cwd(), opts, (err, remoteUrl) ->
     return console.log(err) unless err == null
     pageUrl = ghPublisher.pageUrl(remoteUrl)
-    console.log "Your website has been published at #{pageUrl}"
+    msg = "#{appname()} has been published at #{pageUrl}"
+    console.log msg
     console.log "The first time, it can take up to 10 minutes to show up, so be patient."
+    cb(msg)
 
 tryCompile = (options, callback) ->
   if options.skipBuild
@@ -25,7 +32,7 @@ tryCompile = (options, callback) ->
     else
       deps.npmInstall cb
 
-publishHeroku = (options) ->
+publishHeroku = (options, cb) ->
   config = fs.readJSONSync path.join(process.cwd(), '.leavesrc')
   appName = config.herokuAppName || config.appName || process.cwd()
   publicDir = 'dist'
@@ -39,23 +46,30 @@ publishHeroku = (options) ->
       return console.warn(err) unless err is null
       config.herokuAppName = app.name
       fs.writeJSONSync path.join(process.cwd(), '.leavesrc'), config
-      console.log "Your app has been published to #{app.web_url}"
+      msg = "#{appname()} has been published to #{app.web_url}"
+      console.log msg
+      cb(msg)
 
-publishFtp = (options) ->
+publishFtp = (options, cb) ->
   tryCompile options, ->
     dir = path.join process.cwd(), 'dist'
     ftpPublisher.publish dir, options, (err, info) ->
       if err?
         console.warn "An error has occured while uploading: #{err.message}"
       else
-        console.log "Your site has been uploaded successfully to #{info.hostname}."
+        msg = "#{appname()} has been uploaded successfully to #{info.host}."
+        console.log msg
+        cb(msg)
 
 exports.run = (options) ->
+  cb = (msg) ->
+    slack.post {text: msg}, (err) ->
+      console.log "An error has occured while posting to slack: #{err}" if err
   util.runIfInProject ->
     console.log 'Starting to publish your website.'
     if options.provider == 'github'
-      publishGithub options
+      publishGithub options, cb
     else if options.provider == 'ftp'
-      publishFtp options
+      publishFtp options, cb
     else
-      publishHeroku options
+      publishHeroku options, cb

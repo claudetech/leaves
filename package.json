@@ -48,6 +48,7 @@
     "lodash": "^2.4.1",
     "npm-web-api": "^0.1.1",
     "prompt": "git+https://github.com/claudetech/prompt.git",
+    "request": "^2.45.0",
     "semver": "^3.0.1",
     "underscore.string": "^2.3.3",
     "yeoman-generator": "^0.17.1"

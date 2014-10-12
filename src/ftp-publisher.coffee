@@ -120,7 +120,7 @@ makeDirUpload = (info, dir, remoteDir, onExisting, callback) ->
     return callback(err) if err
     uploadDir c, dir, remoteDir, onExisting, (err) ->
       c.end()
-      return callback(err) if err
+      return callback(err)
 
 exports.publish = (dir, opts, callback) ->
   exports.getInfo opts, (err, ftpData) ->
