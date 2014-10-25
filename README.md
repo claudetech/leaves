@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/claudetech/leaves.png?label=ready&title=Ready)](https://waffle.io/claudetech/leaves)
 # Leaves - Productivity tool for frontend engineers
 
 The full documentation is available in English, French and Japanese at:
