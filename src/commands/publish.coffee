@@ -33,8 +33,8 @@ tryCompile = (options, callback) ->
       deps.npmInstall cb
 
 publishHeroku = (options, cb) ->
-  config = fs.readJSONSync path.join(process.cwd(), '.leavesrc')
-  appName = config.herokuAppName || config.appName || process.cwd()
+  projectConfig = fs.readJSONSync path.join(process.cwd(), '.leavesrc')
+  appName = projectConfig.herokuAppName || projectConfig.appName || process.cwd()
   publicDir = 'dist'
   if options.useDev
     build = 'leaves build --development'
@@ -44,8 +44,8 @@ publishHeroku = (options, cb) ->
   tryCompile options, ->
     herokuPublisher.publish options, (err, app) ->
       return console.warn(err) unless err is null
-      config.herokuAppName = app.name
-      fs.writeJSONSync path.join(process.cwd(), '.leavesrc'), config
+      projectConfig.herokuAppName = app.name
+      fs.writeJSONSync path.join(process.cwd(), '.leavesrc'), projectConfig
       msg = "#{appname()} has been published to #{app.web_url}"
       console.log msg
       cb(msg)
