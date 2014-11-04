@@ -1,6 +1,6 @@
 # Leaves - Productivity tool for frontend engineers
 
-The full documentation is available in English, French and Japanese at:
+The full documentation is available at:
 
 [http://oss.claudetech.com/leaves](http://oss.claudetech.com/leaves)
 
