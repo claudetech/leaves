@@ -53,6 +53,9 @@ checkFile = (key, cb) ->
 readFile = (fileExists, conf, key, cb) ->
   return cb(null, conf, null) unless fileExists
   fs.readJSON exports.path[key], (err, c) ->
+    if err
+      console.warn "Could not parse #{key} config: #{err.message}"
+      return err
     conf[key] = if c? then c else {}
     cb null, conf, err
 

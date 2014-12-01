@@ -1,7 +1,7 @@
 config = require '../config'
 
 saveOfFail = (val, type) ->
- if val
+  if val
     config.saveConfig type, {}, ->
   else
     console.warn "Could not save. Check that you are in a leaves project."

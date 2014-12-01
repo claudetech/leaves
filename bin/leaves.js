@@ -9,7 +9,7 @@ var module         = path.join('../lib/commands', argv.action);
 
 require('async').waterfall([
   require('npm').load,
-  function (npm, cb) { config.load(cb) },
+  function (npm, cb) { config.load(cb); },
   function (cb) { config.handleArgs(argv, cb); }
 ], function (err, args) {
   if (err) return console.warn(err.message);
