@@ -53,7 +53,8 @@ exports.getInfo = (options, callback) ->
       ftpData[k] = v unless _.isEmpty(v)
     checkConnection ftpData, (err) ->
       return callback(err) if err
-      fs.writeFile localSettingsPath, JSON.stringify({ftp: ftpData}, null, 4), ->
+      updatedSettings = JSON.stringify(_.extend(settings, {ftp: ftpData}), null, 4)
+      fs.writeFile localSettingsPath, updatedSettings, ->
         callback err, ftpData
 
 processFiles = (c, files, dir, remoteDir, callback) ->
