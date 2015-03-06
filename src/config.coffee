@@ -42,7 +42,11 @@ exports.path =
 
 checkFile = (key, cb) ->
   if key == 'global'
-    fs.ensureFile exports.path[key], (err) -> cb(err, true)
+    fs.ensureDir path.dirname(exports.path[key]), (err) ->
+      return cb(err) if err
+      fs.exists exports.path[key], (ok) ->
+        return cb(null, true) if ok
+        fs.writeFile exports.path[key], '{}', (err) -> cb(err, true)
   else
     fs.exists exports.path[key], (ok) ->
       return cb(null, ok) if ok || key == 'project'
