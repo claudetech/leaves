@@ -52,14 +52,16 @@ checkFile = (key, cb) ->
       return cb(null, ok) if ok || key == 'project'
       fs.exists exports.path.project, (ok) ->
         return cb(null, false) unless ok
-        fs.ensureFile exports.path[key], (err) -> cb(err, true)
+        fs.exists exports.path[key], (ok) ->
+          return cb(null, true) if ok
+          fs.writeFile exports.path[key], '{}', (err) -> cb(err, true)
 
 readFile = (fileExists, conf, key, cb) ->
   return cb(null, conf, null) unless fileExists
   fs.readJSON exports.path[key], (err, c) ->
     if err
       console.warn "Could not parse #{key} config: #{err.message}"
-      return err
+      return cb(null, conf, err)
     conf[key] = if c? then c else {}
     cb null, conf, err
 
