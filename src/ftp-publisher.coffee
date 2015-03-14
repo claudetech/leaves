@@ -99,7 +99,7 @@ getClient = (info, callback) ->
   c = new Client()
   c.on 'ready', ->
     callback null, c
-  c.on 'error', ->
+  c.on 'error', (err) ->
     callback err
   c.connect info
 
