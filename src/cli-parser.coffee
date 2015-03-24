@@ -77,7 +77,7 @@ parsers.publish = publishParser = actionSubparser.addParser 'publish',
 publishParser.addArgument ['-p', '--provider'],
   action: 'store'
   help: 'Choose provider to publish. Default "heroku".'
-  choices: ['heroku', 'github', 'ftp']
+  choices: ['heroku', 'github', 'ftp', 'scp']
 publishParser.addArgument ['-B', '--skip-build'],
   action: 'storeConst'
   constant: true

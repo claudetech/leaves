@@ -5,6 +5,7 @@ grunt           = require '../grunt'
 deps            = require '../deps'
 ghPublisher     = require '../gh-publisher'
 ftpPublisher    = require '../ftp-publisher'
+scpPublisher    = require '../scp-publisher'
 util            = require '../util'
 config          = require '../config'
 slack           = require '../slack'
@@ -50,16 +51,22 @@ publishHeroku = (options, cb) ->
       console.log msg
       cb(msg)
 
-publishFtp = (options, cb) ->
+publish = (publisher, options, cb) ->
   tryCompile options, ->
     dir = path.join process.cwd(), 'dist'
-    ftpPublisher.publish dir, options, (err, info) ->
+    publisher.publish dir, options, (err, info) ->
       if err?
         console.warn "An error has occured while uploading: #{err.message}"
       else
         msg = "#{appname()} has been uploaded successfully to #{info.host}."
         console.log msg
         cb(msg)
+
+publishFtp = (options, cb) ->
+  publish ftpPublisher, options, cb
+
+publishScp = (options, cb) ->
+  publish scpPublisher, options, cb
 
 exports.run = (options) ->
   cb = (msg) ->
@@ -71,5 +78,7 @@ exports.run = (options) ->
       publishGithub options, cb
     else if options.provider == 'ftp'
       publishFtp options, cb
+    else if options.provider == 'scp'
+      publishScp options, cb
     else
       publishHeroku options, cb
