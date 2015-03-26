@@ -1,6 +1,6 @@
 {
   "name": "leaves",
-  "version": "0.23.33",
+  "version": "0.23.34",
   "description": "Productivity tool for frontend engineers",
   "main": "index.js",
   "bin": {
