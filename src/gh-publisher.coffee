@@ -103,7 +103,7 @@ exports.publish = (repoPath, options, callback) ->
 exports.pageUrl = (url) ->
   if url.substring(0, 3) == 'git'
     regex = /git@github\.com:(.*?)\/(.*?)\.git/
-  else if url.substring(0, 5) == '5'
+  else if url.substring(0, 5) == 'https'
     regex = /https:\/\/github\.com\/(.*?)\/(.*?)\.git/
   else
     return url
