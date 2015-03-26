@@ -1,4 +1,5 @@
 _          = require 'lodash'
+trim       = require 'lodash.trim'
 Repository = require('git-cli').Repository
 path       = require 'path'
 fs         = require 'fs-extra'
@@ -33,7 +34,8 @@ switchBranch = (repo, callback) ->
         callback err
 
 cleanupDir = (directoryPath, publicDir) ->
-  toKeep = [publicDir, 'node_modules', '.git', '.gitignore']
+  ignoredFiles = (trim(f, '/') for f in fs.readFileSync('.gitignore', 'utf8').trim().split('\n'))
+  toKeep = ['.git', '.gitignore'].concat(ignoredFiles)
   _.each fs.readdirSync(directoryPath), (file) ->
     fs.removeSync path.join(directoryPath, file) unless file in toKeep
 
