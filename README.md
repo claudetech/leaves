@@ -2,7 +2,7 @@
 
 The full documentation is available at:
 
-[http://oss.claudetech.com/leaves](http://oss.claudetech.com/leaves)
+[http://leaves.claudetech.com](http://leaves.claudetech.com)
 
 Leaves is a tool running on NodeJS to increase frontend development productivity.
 It is extremely simple to use, requires *only* NodeJS, and contains all the
@@ -40,7 +40,7 @@ $ leaves
 ```
 
 
-For more features, [read the docs](http://oss.claudetech.com/leaves).
+For more features, [read the docs](http://leaves.claudetech.com).
 
 ## Contributing
 

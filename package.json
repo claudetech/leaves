@@ -1,6 +1,6 @@
 {
   "name": "leaves",
-  "version": "0.23.32",
+  "version": "0.23.33",
   "description": "Productivity tool for frontend engineers",
   "main": "index.js",
   "bin": {
@@ -24,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/claudetech/leaves/issues"
   },
-  "homepage": "http://oss.claudetech.com/leaves",
+  "homepage": "http://leaves.claudetech.com",
   "devDependencies": {
     "grunt-contrib-coffee": "^0.10.1",
     "grunt-contrib-watch": "^0.6.1",
